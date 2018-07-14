@@ -13,6 +13,6 @@
         </div>
 
         <div class="content">
-        {{--  CONTENT BURAYA  --}}
+            Dashboard
         </div>
 @endsection
