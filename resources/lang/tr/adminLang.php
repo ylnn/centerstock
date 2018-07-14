@@ -20,5 +20,6 @@ return [
     'reset' => 'Temizle',
     'save' => 'Kaydet',
     'cancel' => 'İptal',
+    'saved' => 'Kaydedildi',
 
 ];
