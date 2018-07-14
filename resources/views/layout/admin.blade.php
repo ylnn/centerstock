@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>TourSale Panel</title>
+    <title>CenterStock Panel</title>
     <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}" >
     {{--  <link href="https://fonts.googleapis.com/css?family=Comfortaa|Open+Sans" rel="stylesheet">  --}}
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
@@ -15,10 +15,10 @@
 </head>
 <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ route('admin.dashboard') }}">TourSale with Laravel</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">CenterStock</a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-            <form class="form-inline" method="POST" action="{{route('logout')}}">
+            <form class="form-inline" method="POST" action="#">
                     {{ csrf_field() }}
                     {{-- <a class="nav-link" href="#">@lang('adminLang.logout')</a> --}}
                     <button type="submit" class="btn btn-secondary">@lang('adminLang.logout')</button>
@@ -46,36 +46,9 @@
                     </h6>
                     <ul class="nav flex-column mb-2">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('home')}}" target="_blank">@lang('adminLang.show-website')</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.category.index') }}">
-                                <span data-feather="file-text"></span>
-                                @lang('adminLang.categories')
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.tour.index') }}">
-                                <span data-feather="file-text"></span>
-                                @lang('adminLang.tour')
-                            </a>
-                        </li>
-                        {{--  <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <span data-feather="file-text"></span>
-                                Tur Tarihleri
-                            </a>
-                        </li>  --}}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.reservation.index') }}">
-                                <span data-feather="file-text"></span>
-                                @lang('adminLang.reservations')
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.payment.index') }}">
-                                <span data-feather="file-text"></span>
-                                @lang('adminLang.payments')
+                                @lang('adminLang.categories')
                             </a>
                         </li>
                     </ul>
