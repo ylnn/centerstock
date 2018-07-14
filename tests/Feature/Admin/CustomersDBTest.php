@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Customer;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -18,6 +19,6 @@ class CustomersDBTest extends TestCase
         
         $exists = Customer::where('id', $customer->id)->exists();
 
-        $this->assertTrue($query);
+        $this->assertTrue($exists);
     }
 }
