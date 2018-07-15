@@ -14,12 +14,14 @@ return [
     'update' => 'Güncelleme',
     'actions' => 'İşlemler',
     'customers' => 'Müşteriler',
+    'customer' => 'Müşteri',
     'create-customer' => 'Müşteri Girişi',
     'phone' => 'Telefon',
     'email' => 'E-posta',
     'reset' => 'Temizle',
     'save' => 'Kaydet',
     'cancel' => 'İptal',
+    'back' => 'Geri',
     'saved' => 'Kaydedildi',
 
 ];
