@@ -57,6 +57,41 @@ class CustomerController extends Controller
 
         return !empty(request('previous')) ? redirect(request('previous')) : redirect()->route(self::indexRoute);
     }
+    
+    public function show(Customer $customer)
+    {
+        return view('admin.customer.show', ['record' => $customer, 'baseRoute' => self::baseRoute]);
+    }
+
+    public function edit(Customer $customer)
+    {
+        return view('admin.customer.edit', ['record' => $customer, 'baseRoute' => self::baseRoute]);
+    }
+
+    public function update(Request $request, Customer $customer)
+    {
+        $this->validate($request, [
+            'name' => 'string|required',
+            'phone' => 'string|nullable',
+            'email' => 'string|nullable',
+        ]);
+
+        $customer->update($request->only('name', 'phone', 'email'));
+
+        showMessage(trans('adminLang.saved'), 'success');
+
+        return !empty(request('previous')) ? redirect(request('previous')) : redirect()->route(self::indexRoute);
+    }
+
+    public function delete(Request $request, Customer $customer)
+    {
+       if ($customer->delete()){
+            showMessage(trans('adminLang.deleted'), 'success');
+       } else {
+            showMessage(trans('adminLang.cantdeleted'), 'success');
+       }
+       return back();
+    }
 
     protected function getOrderByField($query, string $sort = "created_at", $direction = "ASC")
     {
