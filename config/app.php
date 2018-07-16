@@ -80,6 +80,9 @@ return [
 
     'locale' => 'tr',
 
+
+
+    'faker_locale' => 'tr_TR',
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
