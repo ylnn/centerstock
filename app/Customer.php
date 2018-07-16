@@ -10,4 +10,9 @@ class Customer extends Model
     use SoftDeletes;
     protected $fillable = ['name', 'email', 'phone'];
     protected $dates = ['deleted_at'];
+
+    public function area()
+    {
+        return $this->belongsTo('App\Area', 'area_id');
+    }
 }
