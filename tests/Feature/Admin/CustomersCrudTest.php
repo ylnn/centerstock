@@ -8,64 +8,97 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CustomersCrudTest extends TestCase
 {
+    const model = "App\Customer";
+    const baseRoute = "admin.customer";
+    const singularName = "customer";
     /**
-     * show admin dashboard
+     * is index page working test
      *
      * @return void
      */
     public function testCustomersIndexShowTest()
     {
-        $customers = factory("App\Customer", 3)->create();
-        $response = $this->get(route('admin.customer.index'));
+        $records = factory(self::model, 3)->create();
+        $response = $this->get(route(self::baseRoute . '.index'));
         $response->assertStatus(200);
         for ($i=0; $i < 3; $i++) {
-            $response->assertSee(e($customers[$i]->name));
+            $response->assertSee(e($records[$i]->name));
         }
     }
 
+    /**
+     * is create page working test
+     *
+     * @return void
+     */
     public function testCustomerShowCreatePage()
     {
-        $response = $this->get(route('admin.customer.create'));
+        $response = $this->get(route(self::baseRoute . '.create'));
         $response->assertStatus(200);
     }
 
+    /**
+     * is store feature working test
+     *
+     * @return void
+     */
     public function testCustomerStore()
     {
-        $customer = factory(Customer::class)->make();
-        $response = $this->post(route('admin.customer.store', ['name' => $customer->name]));
-        $this->assertTrue(Customer::where('name', $customer->name)->exists());
+        $record = factory(self::model)->make();
+        $response = $this->post(route(self::baseRoute . '.store', ['name' => $record->name]));
+        $this->assertTrue((self::model)::where('name', $record->name)->exists());
     }
 
+    /**
+     * is show page working test
+     *
+     * @return void"
+     */
     public function testShowCustomerPage()
     {
-        $customer = factory(Customer::class)->create();
-        $response = $this->get(route('admin.customer.show',['customer' => $customer->id]));
+        $record = factory(self::model)->create();
+        $response = $this->get(route(self::baseRoute . '.show',[self::singularName => $record->id]));
         $response->assertStatus(200);
-        $response->assertSee(e($customer->name));
+        $response->assertSee(e($record->name));
     }
 
+    /**
+     * is edit page working test
+     *
+     * @return void
+     */
     public function testEditCustomerPage()
     {
-        $customer = factory(Customer::class)->create();
-        $response = $this->get(route('admin.customer.edit',['customer' => $customer->id]));
+        $record = factory(self::model)->create();
+        $response = $this->get(route(self::baseRoute . '.edit',[self::singularName => $record->id]));
         $response->assertStatus(200);
-        $response->assertSee(e($customer->name));
+        $response->assertSee(e($record->name));
     }
 
-    public function testUpdateCustomer()
+    /**
+     * is update feature working test
+     *
+     * @return void
+     */
+    public function testCustomerUpdate()
     {
-        $customer = factory(Customer::class)->create();
-        $this->post(route('admin.customer.update', ['customer' => $customer->id]), [
-            'name' => $customer->name,
+        $record = factory(self::model)->create();
+        $this->post(route(self::baseRoute . '.update', [self::singularName => $record->id]), [
+            'name' => $record->name,
             'phone' => '123456'
         ]);
-        $this->assertTrue(Customer::where('id', $customer->id)->where('phone', '123456')->exists());
+        $this->assertTrue((self::model)::where('id', $record->id)->where('phone', '123456')->exists());
     }
 
+    /**
+     * is delete feature working test
+     *
+     * @return void
+     */
     public function testCustomerDelete()
     {
-        $customer = factory(Customer::class)->create();
-        $this->post(route('admin.customer.delete', ['customer' => $customer->id]));
-        $this->assertFalse(Customer::where('id', $customer->id)->exists());
+        $record = factory(self::model)->create();
+        $this->post(route(self::baseRoute . '.delete', [self::singularName => $record->id]));
+        $this->assertFalse((self::model)::where('id', $record->id)->exists());
     }
 }
