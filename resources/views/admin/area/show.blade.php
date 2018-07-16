@@ -15,18 +15,10 @@
             </tr>
             <tr>
                 <td>
-                    @lang('adminLang.phone')
+                    @lang('adminLang.desc')
                 </td>
                 <td>
-                    {{$record->phone}}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @lang('adminLang.email')
-                </td>
-                <td>
-                    {{$record->email}}
+                    {{$record->desc}}
                 </td>
             </tr>
             
