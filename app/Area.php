@@ -12,4 +12,9 @@ class Area extends Model
     protected $fillable = ['name', 'desc'];
     
     protected $dates = ['deleted_at'];
+
+    public function customers()
+    {
+        return $this->hasMany('App\Customer');
+    }
 }
