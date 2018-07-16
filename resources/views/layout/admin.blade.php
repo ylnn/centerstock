@@ -50,7 +50,14 @@
                                 <span data-feather="file-text"></span>
                                 @lang('adminLang.customers')
                             </a>
-                        </li><li class="nav-item">
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('admin.area.index')}}">
+                                <span data-feather="file-text"></span>
+                                @lang('adminLang.areas')
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <span data-feather="file-text"></span>
                                 @lang('adminLang.categories')
