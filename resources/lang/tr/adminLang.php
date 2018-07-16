@@ -11,6 +11,7 @@ return [
     'search' => 'Ara',
     'name' => 'İsim',
     'desc' => 'Açıklama',
+    'none' => 'Yok',
     'add' => 'Ekleme',
     'update' => 'Güncelleme',
     'actions' => 'İşlemler',
