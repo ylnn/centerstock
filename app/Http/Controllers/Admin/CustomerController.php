@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Area;
+use App\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Customer;
 
 
 class CustomerController extends Controller
@@ -40,7 +41,7 @@ class CustomerController extends Controller
 
     public function create()
     {
-        return view(self::baseRoute . '.create', ['baseRoute' => self::baseRoute]);
+        return view(self::baseRoute . '.create', ['baseRoute' => self::baseRoute, 'areas' => Area::orderBy('name', 'ASC')->get()]);
     }
 
     public function store(Request $request)
@@ -49,9 +50,10 @@ class CustomerController extends Controller
             'name' => 'string|required|unique:customers,name',
             'phone' => 'string|nullable',
             'email' => 'string|nullable',
+            'area_id' => 'integer|nullable',
         ]);
 
-        Customer::create($request->only('name', 'phone', 'email'));
+        Customer::create($request->only('name', 'phone', 'email', 'area_id'));
 
         showMessage(trans('adminLang.saved'), 'success');
 
@@ -65,7 +67,7 @@ class CustomerController extends Controller
 
     public function edit(Customer $customer)
     {
-        return view('admin.customer.edit', ['record' => $customer, 'baseRoute' => self::baseRoute]);
+        return view('admin.customer.edit', ['record' => $customer, 'baseRoute' => self::baseRoute, 'areas' => Area::orderBy('name', 'ASC')->get()]);
     }
 
     public function update(Request $request, Customer $customer)
@@ -74,9 +76,10 @@ class CustomerController extends Controller
             'name' => 'string|required',
             'phone' => 'string|nullable',
             'email' => 'string|nullable',
+            'area_id' => 'integer|nullable',
         ]);
 
-        $customer->update($request->only('name', 'phone', 'email'));
+        $customer->update($request->only('name', 'phone', 'email', 'area_id'));
 
         showMessage(trans('adminLang.saved'), 'success');
 

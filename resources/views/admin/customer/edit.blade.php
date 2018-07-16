@@ -19,6 +19,15 @@
                     <label for="email">@lang('adminLang.email')</label>
                     <input type="text" class="form-control" id="email" name="email" value="{{$record->email}}">
                 </div>
+                <div class="form-group">
+                    <label for="area">@lang('adminLang.area')</label>
+                    <select name="area_id" id="area_id" class="form-control">
+                        <option>@lang('adminLang.none')</option>
+                        @foreach ($areas as $area)
+                            <option @if($area->id == $record->area_id) @endif value="{{$area->id}}">{{$area->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
 
                 <button type="submit" class="btn btn-primary">@lang('adminLang.save')</button>
                 <a href="{{ url()->previous() }}" class="btn btn-secondary">@lang('adminLang.cancel')</a>
