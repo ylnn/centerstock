@@ -84,10 +84,9 @@ class AreasCrudTest extends TestCase
     {
         $record = factory(self::model)->create();
         $this->post(route(self::baseRoute . '.update', [self::singularName => $record->id]), [
-            'name' => $record->name,
-            'phone' => '123456'
+            'name' => $record->name . "_test",
         ]);
-        $this->assertTrue((self::model)::where('id', $record->id)->where('phone', '123456')->exists());
+        $this->assertTrue((self::model)::where('id', $record->id)->where('name', $record->name . "_test")->exists());
     }
 
     /**
