@@ -15,8 +15,8 @@
                     <label for="desc">@lang('adminLang.desc')</label>
                     <textarea name="desc" class="form-control" id="desc" cols="30" rows="10"></textarea>
                 </div>
-                <a href="{{ url()->previous() }}" class="btn btn-secondary">@lang('adminLang.cancel')</a>
                 <button type="submit" class="btn btn-primary">@lang('adminLang.save')</button>
+                <a href="{{ url()->previous() }}" class="btn btn-secondary">@lang('adminLang.cancel')</a>
                 <input type="hidden" name="previous" value="{{ url()->previous() }}">
             </form>
 
