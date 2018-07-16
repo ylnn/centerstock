@@ -46,6 +46,11 @@
                     </h6>
                     <ul class="nav flex-column mb-2">
                         <li class="nav-item">
+                            <a class="nav-link" href="{{route('admin.customer.index')}}">
+                                <span data-feather="file-text"></span>
+                                @lang('adminLang.customers')
+                            </a>
+                        </li><li class="nav-item">
                             <a class="nav-link" href="#">
                                 <span data-feather="file-text"></span>
                                 @lang('adminLang.categories')
@@ -73,7 +78,6 @@
 
     
     
-</body>
 
 
     <script src="{{asset('js/jquery-3.3.1.slim.min.js')}}"></script>
@@ -98,4 +102,5 @@
     </script>
 
     @stack('scripts')
+    </body>
 </html>
