@@ -23,5 +23,9 @@ return [
     'cancel' => 'İptal',
     'back' => 'Geri',
     'saved' => 'Kaydedildi',
+    'deleted' => 'Silindi',
+    'cantdeleted' => 'Silinemedi',
+    'not-found' => 'İçerik bulunamadı.',
+    'are-you-sure' => 'Emin misiniz?'
 
 ];
