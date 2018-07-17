@@ -35,5 +35,8 @@ return [
     'area' => 'Bölge',
     'create-area' => 'Bölge Girişi',
 
+    'products' => 'Ürünler',
+    'product' => 'Ürün',
+    'create-product' => 'Ürün Girişi',
 
 ];

@@ -20,3 +20,13 @@ Route::get('/area/show/{area}', 'Admin\AreaController@show')->name('admin.area.s
 Route::get('/area/edit/{area}', 'Admin\AreaController@edit')->name('admin.area.edit');
 Route::post('/area/update/{area}', 'Admin\AreaController@update')->name('admin.area.update');
 Route::post('/area/delete/{area}', 'Admin\AreaController@delete')->name('admin.area.delete');
+
+
+// Product
+Route::get('/product', 'Admin\ProductController@index')->name('admin.product.index');
+Route::get('/product/create', 'Admin\ProductController@create')->name('admin.product.create');
+Route::post('/product/store', 'Admin\ProductController@store')->name('admin.product.store');
+Route::get('/product/show/{product}', 'Admin\ProductController@show')->name('admin.product.show');
+Route::get('/product/edit/{product}', 'Admin\ProductController@edit')->name('admin.product.edit');
+Route::post('/product/update/{product}', 'Admin\ProductController@update')->name('admin.product.update');
+Route::post('/product/delete/{product}', 'Admin\ProductController@delete')->name('admin.product.delete');
