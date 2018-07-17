@@ -57,7 +57,7 @@ class AreaController extends Controller
 
         // return !empty(request('previous')) ? redirect(request('previous')) : redirect()->route(self::indexRoute);
 
-        return redirect()->route(self::indexRoute)
+        return redirect()->route(self::indexRoute);
     }
     
     public function show(Area $area)
@@ -84,7 +84,7 @@ class AreaController extends Controller
 
         // return !empty(request('previous')) ? redirect(request('previous')) : redirect()->route(self::indexRoute);
 
-        return redirect()->route(self::indexRoute)
+        return redirect()->route(self::indexRoute);
     }
 
     public function delete(Request $request, Area $area)
