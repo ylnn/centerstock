@@ -17,9 +17,9 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">@lang('adminLang.save')</button>
-                <a href="{{ url()->previous() }}" class="btn btn-secondary">@lang('adminLang.cancel')</a>
-
-                <input type="hidden" name="previous" value="{{ url()->previous() }}">
+                {{-- <a href="{{ old('previous') ?? url()->previous() }}" class="btn btn-secondary">@lang('adminLang.cancel')</a> --}}
+                <a href="{{route($baseRoute.'.index')}}" class="btn btn-secondary">@lang('adminLang.cancel')</a>
+                <input type="hidden" name="previous" value="{{ old('previous') ?? url()->previous() }}">
             </form>
 
         </div>
