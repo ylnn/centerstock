@@ -5,7 +5,6 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
       <h1 class="h2">@lang('adminLang.customers')</h1>
       <div class="btn-toolbar mb-2 mb-md-0">
-        
         <div class="btn-group mr-2">
         <a href="{{ route('admin.customer.create') }}" class="btn btn-sm btn-outline-secondary">+ @lang('adminLang.new')</a>
         </div>
@@ -36,6 +35,7 @@
           <thead>
             <tr>
               <th><a href="?q={{$q}}&sort=name&direction=@php echo $direction == 'ASC' ? 'DESC' : 'ASC'; @endphp">@lang('adminLang.name') </a></th>
+              <th>@lang('adminLang.area')</th>
               <th><a href="?q={{$q}}&sort=created_at&direction=@php echo $direction == 'ASC' ? 'DESC' : 'ASC'; @endphp">@lang('adminLang.add')</a></th>
               <th><a href="?q={{$q}}&sort=updated_at&direction=@php echo $direction == 'ASC' ? 'DESC' : 'ASC'; @endphp">@lang('adminLang.update') </a></th>
               <th class="text-right">@lang('adminLang.actions')</th>
@@ -46,6 +46,7 @@
               @forelse ($records as $record)
                 <tr>
                   <td>{{$record->name}}</td>
+                  <td>{{optional($record->area)->name}}</td>
                   <td>{{$record->created_at->format('d.m.y')}}</td>
                   <td>{{$record->updated_at->format('d.m.y')}}</td>
                   <td class="">
