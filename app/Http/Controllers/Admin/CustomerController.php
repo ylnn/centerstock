@@ -49,7 +49,7 @@ class CustomerController extends Controller
         $this->validate($request, [
             'name' => 'string|required|unique:customers,name',
             'phone' => 'string|nullable',
-            'email' => 'string|nullable',
+            'email' => 'email|nullable',
             'area_id' => 'integer|nullable',
         ]);
 
@@ -57,7 +57,8 @@ class CustomerController extends Controller
 
         showMessage(trans('adminLang.saved'), 'success');
 
-        return !empty(request('previous')) ? redirect(request('previous')) : redirect()->route(self::indexRoute);
+        // return !empty(request('previous')) ? redirect(request('previous')) : redirect()->route(self::indexRoute);
+        return redirect()->route(self::indexRoute);
     }
     
     public function show(Customer $customer)
@@ -67,7 +68,11 @@ class CustomerController extends Controller
 
     public function edit(Customer $customer)
     {
-        return view('admin.customer.edit', ['record' => $customer, 'baseRoute' => self::baseRoute, 'areas' => Area::orderBy('name', 'ASC')->get()]);
+        return view('admin.customer.edit', [
+            'record' => $customer, 
+            'baseRoute' => self::baseRoute, 
+            'areas' => Area::orderBy('name', 'ASC')->get()
+        ]);
     }
 
     public function update(Request $request, Customer $customer)
@@ -75,7 +80,7 @@ class CustomerController extends Controller
         $this->validate($request, [
             'name' => 'string|required',
             'phone' => 'string|nullable',
-            'email' => 'string|nullable',
+            'email' => 'email|nullable',
             'area_id' => 'integer|nullable',
         ]);
 
@@ -83,7 +88,8 @@ class CustomerController extends Controller
 
         showMessage(trans('adminLang.saved'), 'success');
 
-        return !empty(request('previous')) ? redirect(request('previous')) : redirect()->route(self::indexRoute);
+        // return !empty(request('previous')) ? redirect(request('previous')) : redirect()->route(self::indexRoute);
+        return redirect()->route(self::indexRoute);
     }
 
     public function delete(Request $request, Customer $customer)
