@@ -38,5 +38,6 @@ return [
     'products' => 'Ürünler',
     'product' => 'Ürün',
     'create-product' => 'Ürün Girişi',
+    'base_price' => 'Baz Fiyat',
 
 ];
