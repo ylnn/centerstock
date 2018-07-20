@@ -30,3 +30,13 @@ Route::get('/product/show/{product}', 'Admin\ProductController@show')->name('adm
 Route::get('/product/edit/{product}', 'Admin\ProductController@edit')->name('admin.product.edit');
 Route::post('/product/update/{product}', 'Admin\ProductController@update')->name('admin.product.update');
 Route::post('/product/delete/{product}', 'Admin\ProductController@delete')->name('admin.product.delete');
+
+
+// Stock
+Route::get('/stock/{product}', 'Admin\StockController@index')->name('admin.stock.index');
+Route::get('/stock/{product}/create', 'Admin\StockController@create')->name('admin.stock.create');
+Route::post('/stock/{product}/store', 'Admin\StockController@store')->name('admin.stock.store');
+Route::get('/stock/{product}/show/{stock}', 'Admin\StockController@show')->name('admin.stock.show');
+Route::get('/stock/{product}/edit/{stock}', 'Admin\StockController@edit')->name('admin.stock.edit');
+Route::post('/stock/{product}/update/{stock}', 'Admin\StockController@update')->name('admin.stock.update');
+Route::post('/stock/{product}/delete/{stock}', 'Admin\StockController@delete')->name('admin.stock.delete');

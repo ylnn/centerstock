@@ -50,6 +50,9 @@
                   <td class="">
                     <div class="d-flex justify-content-end">
                       <span class="flex mr-1">
+                        <a href="{{ route('admin.stock.index', ['product' => $record->id]) }} " class="btn btn-secondary btn-sm">@lang('adminLang.stocks')</a>
+                      </span>
+                      <span class="flex mr-1">
                         <a href="{{ route($baseRoute . '.show', [$record->id]) }} " class="btn btn-primary btn-sm">@lang('adminLang.show')</a>
                       </span>
                       <span class="flex mr-1">

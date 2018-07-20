@@ -40,4 +40,15 @@ return [
     'create-product' => 'Ürün Girişi',
     'base_price' => 'Baz Fiyat',
 
+    'stocks' => 'Stoklar',
+    'stock' => 'Stok',
+    'create-stock' => 'Stok Girişi',
+    'serial' => 'Seri Numarası',
+    'product-name' => 'Ürün Adı',
+    'quantity' => 'Adet',
+    'expiration' => 'SKT',
+    'purchase_price' => 'Alım Fiyatı',
+    'sale_price' => 'Satış Fiyatı',
+
+
 ];
