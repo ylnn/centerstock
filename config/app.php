@@ -81,6 +81,9 @@ return [
     'locale' => 'tr',
 
 
+    // Currency Locale
+    setlocale(LC_MONETARY, 'tr_TR'),
+
 
     'faker_locale' => 'tr_TR',
     /*
