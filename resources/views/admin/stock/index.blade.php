@@ -2,9 +2,9 @@
 
 @section('content')
 
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
 
-      <div class="mb-4">
+      <div class="mb-1">
           <h2>@lang('adminLang.stocks')</h2>
           <h4 class="alert alert-info">{{$product->name}}</h4>
       </div>
@@ -41,7 +41,7 @@
                   <td>{{$record->serial}}</td>
                   <td>{{optional($record->product)->name}}</td>
                   <td>{{$record->quantity}}</td>
-                  <td>{{$record->purchase_price}}</td>
+                  <td>{{ $record->purchase_price}}</td>
                   <td>{{$record->sale_price}}</td>
                   <td>{{ \Carbon\Carbon::parse($record->expiration_at)->format('d/m/Y') }}</td>
                   <td class="">
