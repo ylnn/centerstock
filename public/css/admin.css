@@ -7,6 +7,10 @@ body {
   font-size: .8rem;
 }
 
+input, select {
+  font-size: .8rem !important;
+}
+
 .feather {
   width: 16px;
   height: 16px;
