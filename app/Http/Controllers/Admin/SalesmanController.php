@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Salesman;
+use App\Area;
 
 
 class SalesmanController extends Controller
@@ -33,14 +34,17 @@ class SalesmanController extends Controller
         $records = $query->paginate(self::pagination)->appends(request()->query());;
 
         $baseRoute = self::baseRoute;
+
+        $areas = Area::orderBy('name', 'ASC')->get();
         
-        return view(self::baseRoute.".index", compact('records', 'q', 'p', 'sort', 'direction', 'baseRoute'));
+        return view(self::baseRoute.".index", compact('records', 'q', 'p', 'sort', 'direction', 'baseRoute', 'areas'));
 
     }
 
     public function create()
     {
-        return view(self::baseRoute . '.create', ['baseRoute' => self::baseRoute]);
+        $areas = Area::orderBy('name', 'ASC')->get();
+        return view(self::baseRoute . '.create', ['baseRoute' => self::baseRoute, 'areas' => $areas]);
     }
 
     public function store(Request $request)
