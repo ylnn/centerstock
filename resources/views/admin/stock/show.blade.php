@@ -21,6 +21,36 @@
                     {{$record->product->name}}
                 </td>
             </tr>
+            <tr>
+                <td>
+                    @lang('adminLang.expiration')
+                </td>
+                <td>{{ \Carbon\Carbon::parse($record->expiration_at)->format('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <td>
+                    @lang('adminLang.quantity')
+                </td>
+                <td>
+                    {{$record->quantity}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @lang('adminLang.purchase_price')
+                </td>
+                <td>
+                    {{$record->purchase_price}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @lang('adminLang.sale_price')
+                </td>
+                <td>
+                    {{$record->sale_price}}
+                </td>
+            </tr>
             
         </table>
     </div>
