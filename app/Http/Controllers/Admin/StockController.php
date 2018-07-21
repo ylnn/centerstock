@@ -56,16 +56,13 @@ class StockController extends Controller
 
     public function store(Request $request)
     {
-        // remove comma and point from prices in request with regex
-        $request['purchase_price'] = preg_replace('/[\.,]/', '', $request->purchase_price);
-        $request['sale_price'] = preg_replace('/[\.,]/', '', $request->sale_price);
 
         $this->validate($request, [
             'serial' => 'integer|required|unique:stocks,serial',
             'product_id' => 'integer',
             'quantity' => 'integer|required',
-            'purchase_price' => 'integer|required',
-            'sale_price' => 'integer|required',
+            'purchase_price' => "required|regex:/^\d*(\.\d{1,2})?$/",
+            'sale_price' => "required|regex:/^\d*(\.\d{1,2})?$/",
             'user_id' => 'integer|required|exists:users,id',
             'expiration_at' => 'date|nullable',
         ]);
@@ -101,15 +98,12 @@ class StockController extends Controller
 
     public function update(Request $request, Product $product, Stock $stock)
     {
-        // remove comma and point from prices in request with regex
-        $request['purchase_price'] = preg_replace('/[\.,]/', '', $request->purchase_price);
-        $request['sale_price'] = preg_replace('/[\.,]/', '', $request->sale_price);
 
         $this->validate($request, [
             'product_id' => 'integer',
             'quantity' => 'integer|required',
-            'purchase_price' => 'integer|required',
-            'sale_price' => 'integer|required',
+            'purchase_price' => "required|regex:/^\d*(\.\d{1,2})?$/",
+            'sale_price' => "required|regex:/^\d*(\.\d{1,2})?$/",
             'user_id' => 'integer|required|exists:users,id',
             'expiration_at' => 'date|nullable',
         ]);
