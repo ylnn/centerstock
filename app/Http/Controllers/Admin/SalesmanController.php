@@ -76,18 +76,23 @@ class SalesmanController extends Controller
 
     public function edit(Salesman $salesman)
     {
-        return view('admin.salesman.edit', ['record' => $salesman, 'baseRoute' => self::baseRoute]);
+        $areas = Area::orderBy('name', 'ASC')->get();
+        return view('admin.salesman.edit', ['record' => $salesman, 'baseRoute' => self::baseRoute, 'areas' => $areas]);
     }
 
     public function update(Request $request, Salesman $salesman)
     {
         $this->validate($request, [
-            'name' => 'string|required',
+            'email' => 'email|required',
+            'name' => 'string|required|unique:salesmen,name',
+            'status' => 'boolean|required',
+            'area_id' => 'integer|required|exists:areas,id',
             'phone' => 'string|nullable',
-            'email' => 'string|nullable',
+            'address' => 'string|nullable',
+            'desc' => 'string|nullable',
         ]);
 
-        $salesman->update($request->only('name', 'phone', 'email'));
+        $salesman->update($request->only('email', 'name', 'status', 'area_id', 'phone', 'address', 'desc'));
 
         showMessage(trans('adminLang.saved'), 'success');
 
