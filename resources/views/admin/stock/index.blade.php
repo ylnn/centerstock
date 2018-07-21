@@ -3,7 +3,12 @@
 @section('content')
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-      <h1 class="h2">{{optional($product)->name}} | @lang('adminLang.stocks')</h1>
+
+      <div class="mb-4">
+          <h2>@lang('adminLang.stocks')</h2>
+          <h4 class="alert alert-info">{{$product->name}}</h4>
+      </div>
+
       <div class="btn-toolbar mb-2 mb-md-0">
         
         <div class="btn-group mr-2">
@@ -23,6 +28,8 @@
               <th><a href="?q={{$q}}&sort=serial&direction=@php echo $direction == 'ASC' ? 'DESC' : 'ASC'; @endphp">@lang('adminLang.serial') </a></th>
               <th>@lang('adminLang.product-name')</th>
               <th><a href="?q={{$q}}&sort=quantity&direction=@php echo $direction == 'ASC' ? 'DESC' : 'ASC'; @endphp">@lang('adminLang.quantity')</a></th>
+              <th><a href="?q={{$q}}&sort=purchase_price&direction=@php echo $direction == 'ASC' ? 'DESC' : 'ASC'; @endphp">@lang('adminLang.purchase_price')</a></th>
+              <th><a href="?q={{$q}}&sort=sale_price&direction=@php echo $direction == 'ASC' ? 'DESC' : 'ASC'; @endphp">@lang('adminLang.sale_price')</a></th>
               <th><a href="?q={{$q}}&sort=expiration_at&direction=@php echo $direction == 'ASC' ? 'DESC' : 'ASC'; @endphp">@lang('adminLang.expiration')</a></th>
               <th class="text-right">@lang('adminLang.actions')</th>
             </tr>
@@ -34,6 +41,8 @@
                   <td>{{$record->serial}}</td>
                   <td>{{optional($record->product)->name}}</td>
                   <td>{{$record->quantity}}</td>
+                  <td>{{$record->purchase_price}}</td>
+                  <td>{{$record->sale_price}}</td>
                   <td>{{ \Carbon\Carbon::parse($record->expiration_at)->format('d/m/Y') }}</td>
                   <td class="">
                     <div class="d-flex justify-content-end">
