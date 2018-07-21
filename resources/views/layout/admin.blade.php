@@ -95,7 +95,6 @@
     <script src="{{asset('css/summernote/summernote-bs4.js')}}"></script>
     {{-- <script src="{{asset('js/app.js')}}"></script> --}}
     <script src="{{asset('js/popper.min.js')}}"></script>
-    <script src="{{asset('js/jquery.mask.min.js')}}"></script>
 
     <script>
         $(document).ready(function() {
@@ -105,8 +104,6 @@
             $('#summernote-short').summernote({
                 height: 100
             });
-            $('#purchase_price').mask('000.000.000.000.000,00', {reverse: true});
-            $('#sale_price').mask('000.000.000.000.000,00', {reverse: true});
         });
     </script>
 
