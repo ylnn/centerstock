@@ -14,19 +14,19 @@
                 {{csrf_field()}}
                 <div class="form-group">
                     <label for="serial">@lang('adminLang.serial')</label>
-                    <input type="text" class="form-control" id="serial" name="serial" autofocus required>
+                    <input type="text" class="form-control" id="serial" name="serial" value="{{old('serial')}}" autofocus required>
                 </div>
                 <div class="form-group">
                     <label for="quantity">@lang('adminLang.quantity')</label>
-                    <input type="text" class="form-control" id="quantity" name="quantity">
+                    <input type="text" class="form-control" id="quantity" value="{{old('quantity')}}" name="quantity">
                 </div>
                 <div class="form-group">
                     <label for="purchase_price">@lang('adminLang.purchase_price')</label>
-                    <input type="text" class="form-control" id="purchase_price" name="purchase_price">
+                    <input type="text" class="form-control" id="purchase_price" value="{{old('purchase_price')}}" name="purchase_price">
                 </div>
                 <div class="form-group">
                     <label for="sale_price">@lang('adminLang.sale_price')</label>
-                    <input type="text" class="form-control" id="sale_price" name="sale_price">
+                    <input type="text" class="form-control" id="sale_price" value="{{old('sale_price')}}" name="sale_price">
                 </div>
                 <div class="form-group">
                     <label for="user_id">USER (DEĞİŞECEK)</label>
