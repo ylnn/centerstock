@@ -53,6 +53,9 @@ return [
     'salesmans' => 'Satış Elemanları',
     'salesman' => 'Satış Elamanı',
     'create-salesman' => 'Satış Elemanı Girişi',
+    'status' => 'Durum',
+    'password' => 'Şifre',
+    'address' => 'Adres',
 
 
 ];
