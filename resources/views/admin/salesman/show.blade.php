@@ -15,6 +15,39 @@
             </tr>
             <tr>
                 <td>
+                    @lang('adminLang.area')
+                </td>
+                <td>
+                    {{$record->area->name}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @lang('adminLang.email')
+                </td>
+                <td>
+                    {{$record->email}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @lang('adminLang.phone')
+                </td>
+                <td>
+                    {{$record->phone}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @lang('adminLang.address')
+                </td>
+                <td>
+                    {{$record->address}}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
                     @lang('adminLang.desc')
                 </td>
                 <td>
