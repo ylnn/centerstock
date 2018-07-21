@@ -45,7 +45,10 @@ class ProductsCrudTest extends TestCase
     public function testProductStore()
     {
         $record = factory(self::model)->make();
-        $response = $this->post(route(self::baseRoute . '.store', ['name' => $record->name]));
+        $response = $this->post(route(self::baseRoute . '.store', [
+            'name' => $record->name, 
+            'base_price' => $record->base_price
+        ]));
         $this->assertTrue((self::model)::where('name', $record->name)->exists());
     }
 
