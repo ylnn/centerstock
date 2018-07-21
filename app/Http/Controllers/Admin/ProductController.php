@@ -48,12 +48,10 @@ class ProductController extends Controller
     {
         $this->validate($request, [
             'name' => 'string|required|unique:products,name',
-            'phone' => 'string|nullable',
-            'email' => 'email|nullable',
-            'area_id' => 'integer|nullable',
+            'base_price' => "required|regex:/^\d*(\.\d{1,2})?$/",
         ]);
 
-        Product::create($request->only('name', 'phone', 'email', 'area_id'));
+        Product::create($request->only('name', 'base_price'));
 
         showMessage(trans('adminLang.saved'), 'success');
 
@@ -79,12 +77,10 @@ class ProductController extends Controller
     {
         $this->validate($request, [
             'name' => 'string|required',
-            'phone' => 'string|nullable',
-            'email' => 'email|nullable',
-            'area_id' => 'integer|nullable',
+            'base_price' => "required|regex:/^\d*(\.\d{1,2})?$/",
         ]);
 
-        $product->update($request->only('name', 'phone', 'email', 'area_id'));
+        $product->update($request->only('name', 'base_price'));
 
         showMessage(trans('adminLang.saved'), 'success');
 
