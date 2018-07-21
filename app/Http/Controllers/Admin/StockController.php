@@ -56,6 +56,10 @@ class StockController extends Controller
 
     public function store(Request $request)
     {
+        // remove comma and point from prices in request with regex
+        $request['purchase_price'] = preg_replace('/[\.,]/', '', $request->purchase_price);
+        $request['sale_price'] = preg_replace('/[\.,]/', '', $request->sale_price);
+
         $this->validate($request, [
             'serial' => 'integer|required|unique:stocks,serial',
             'product_id' => 'integer',
@@ -97,8 +101,11 @@ class StockController extends Controller
 
     public function update(Request $request, Product $product, Stock $stock)
     {
+        // remove comma and point from prices in request with regex
+        $request['purchase_price'] = preg_replace('/[\.,]/', '', $request->purchase_price);
+        $request['sale_price'] = preg_replace('/[\.,]/', '', $request->sale_price);
+
         $this->validate($request, [
-            'serial' => 'integer|required|unique:stocks,serial',
             'product_id' => 'integer',
             'quantity' => 'integer|required',
             'purchase_price' => 'integer|required',
@@ -107,8 +114,7 @@ class StockController extends Controller
             'expiration_at' => 'date|nullable',
         ]);
 
-        $stock->serial = $request->serial;
-        $stock->product_id = $request->product_id;
+        $stock->product_id = $product->id;
         $stock->quantity = $request->quantity;
         $stock->purchase_price = $request->purchase_price;
         $stock->sale_price = $request->sale_price;
