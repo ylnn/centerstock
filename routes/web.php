@@ -40,3 +40,12 @@ Route::get('/stock/{product}/show/{stock}', 'Admin\StockController@show')->name(
 Route::get('/stock/{product}/edit/{stock}', 'Admin\StockController@edit')->name('admin.stock.edit');
 Route::post('/stock/{product}/update/{stock}', 'Admin\StockController@update')->name('admin.stock.update');
 Route::post('/stock/{product}/delete/{stock}', 'Admin\StockController@delete')->name('admin.stock.delete');
+
+// Salesman
+Route::get('/salesman', 'Admin\SalesmanController@index')->name('admin.salesman.index');
+Route::get('/salesman/create', 'Admin\SalesmanController@create')->name('admin.salesman.create');
+Route::post('/salesman/store', 'Admin\SalesmanController@store')->name('admin.salesman.store');
+Route::get('/salesman/show/{salesman}', 'Admin\SalesmanController@show')->name('admin.salesman.show');
+Route::get('/salesman/edit/{salesman}', 'Admin\SalesmanController@edit')->name('admin.salesman.edit');
+Route::post('/salesman/update/{salesman}', 'Admin\SalesmanController@update')->name('admin.salesman.update');
+Route::post('/salesman/delete/{salesman}', 'Admin\SalesmanController@delete')->name('admin.salesman.delete');

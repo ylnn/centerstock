@@ -50,5 +50,9 @@ return [
     'purchase_price' => 'Alım Fiyatı',
     'sale_price' => 'Satış Fiyatı',
 
+    'salesmans' => 'Satış Elemanları',
+    'salesman' => 'Satış Elamanı',
+    'create-salesman' => 'Satış Elemanı Girişi',
+
 
 ];
