@@ -57,7 +57,12 @@
                                 @lang('adminLang.products')
                             </a>
                         </li>
-                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('admin.salesman.index')}}">
+                                <span data-feather="file-text"></span>
+                                @lang('adminLang.salesmans')
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('admin.area.index')}}">
                                 <span data-feather="file-text"></span>
