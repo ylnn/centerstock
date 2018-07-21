@@ -17,4 +17,9 @@ class Area extends Model
     {
         return $this->hasMany('App\Customer');
     }
+
+    public function salesmans()
+    {
+        return $this->hasMany('App\Salesman');
+    }
 }
