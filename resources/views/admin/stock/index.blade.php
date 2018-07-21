@@ -63,7 +63,7 @@
                 </tr>
                 @empty
                 <tr>
-                  <td colspan="5">
+                  <td colspan="7">
                     <div class="p-4">
                       <p>@lang('adminLang.not-found')</p>
                       <a name="" id="" class="btn btn-secondary btn-sm" href="{{ route('admin.stock.create', ['product' => $product->id]) }}" role="button">@lang('adminLang.new')</a>
