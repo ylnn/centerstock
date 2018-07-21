@@ -18,8 +18,8 @@ class CreateStocksTable extends Migration
             $table->integer('product_id')->index();
             $table->unsignedBigInteger('serial');
             $table->integer('quantity');
-            $table->integer('purchase_price');
-            $table->integer('sale_price');
+            $table->unsignedDecimal('purchase_price', 8, 2);
+            $table->unsignedDecimal('sale_price', 8, 2);
             $table->integer('user_id');
             $table->dateTime('expiration_at')->nullable();
             $table->timestamps();
