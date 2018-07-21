@@ -6,7 +6,7 @@
     <div class="col-6">
 
         <div class="mb-4">
-            <h2>@lang('adminLang.adminLang.stock') @lang('adminLang.create')</h2>
+            <h2>@lang('adminLang.create-stock')</h2>
             <h4 class="alert alert-info">{{$product->name}}</h4>
         </div>
 
