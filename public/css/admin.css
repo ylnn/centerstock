@@ -1,6 +1,10 @@
 
 body {
-  font-size: .875rem;
+  font-size: .8rem !important;
+}
+
+.btn {
+  font-size: .8rem;
 }
 
 .feather {
