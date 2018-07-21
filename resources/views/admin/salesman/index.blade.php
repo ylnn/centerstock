@@ -36,8 +36,7 @@
           <thead>
             <tr>
               <th><a href="?q={{$q}}&sort=name&direction=@php echo $direction == 'ASC' ? 'DESC' : 'ASC'; @endphp">@lang('adminLang.name') </a></th>
-              <th><a href="?q={{$q}}&sort=created_at&direction=@php echo $direction == 'ASC' ? 'DESC' : 'ASC'; @endphp">@lang('adminLang.add')</a></th>
-              <th><a href="?q={{$q}}&sort=updated_at&direction=@php echo $direction == 'ASC' ? 'DESC' : 'ASC'; @endphp">@lang('adminLang.update') </a></th>
+              <th>@lang('adminLang.area')</th>
               <th class="text-right">@lang('adminLang.actions')</th>
             </tr>
           </thead>
@@ -46,8 +45,7 @@
               @forelse ($records as $record)
                 <tr>
                   <td>{{$record->name}}</td>
-                  <td>{{$record->created_at->format('d.m.y')}}</td>
-                  <td>{{$record->updated_at->format('d.m.y')}}</td>
+                  <td>{{$record->area->name}}</td>
                   <td class="">
                     <div class="d-flex justify-content-end">
                       <span class="flex mr-1">
