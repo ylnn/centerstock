@@ -126,8 +126,8 @@ class StocksCrudTest extends TestCase
         //create stock
         $record = factory(self::model)->create();
 
-        $orginalSerial = $record->serial;
-        $record->serial = $orginalSerial . "9999";
+        $orginalValue = intval($record->quantity);
+        $record->quantity = intval($orginalValue + 55);
 
 
         //post update data
@@ -135,7 +135,7 @@ class StocksCrudTest extends TestCase
 
         // check record is updated in db
 
-        $this->assertTrue((self::model)::where('id', $record->id)->where('serial', $orginalSerial . '9999')->exists());
+        $this->assertTrue((self::model)::where('id', $record->id)->where('quantity', $orginalValue + 55 )->exists());
     }
 
     /**
