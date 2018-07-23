@@ -123,4 +123,28 @@ class SalesmansCrudTest extends TestCase
         $this->post(route(self::baseRoute . '.delete', [self::singularName => $record->id]));
         $this->assertFalse((self::model)::where('id', $record->id)->exists());
     }
+
+    /**
+     * is query with area_id feature working test
+     *
+     * @return void
+     */
+    public function testSalesmanFilterWithArea()
+    {
+        // create record
+        $record = factory(self::model)->create();
+        
+        //create record for don't see
+        $record2 = factory(self::model)->create();
+
+        //get index page with area name query
+        $response = $this->get(route(self::baseRoute . '.index', ['area_id' => $record->area_id]));
+
+        //assert see name and area name
+        $response->assertSeeText(e($record->area->name));
+        
+        //assert dont see name and area name
+        $response->assertDontSeeText(e($record2->area->name));
+
+    }
 }

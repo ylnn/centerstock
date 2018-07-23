@@ -19,6 +19,14 @@
             <div class="col-3">
               <input type="text" class="form-control" name="q" value="{{$q ?? ''}}" placeholder="@lang('adminLang.search')...">
             </div>
+            <div class="col-3">
+                <select name="area_id" id="area_id" class="form-control">
+                  <option value="0">@lang('adminLang.area'): @lang('adminLang.all')</option>
+                    @foreach ($areas as $area)
+                        <option value="{{$area->id}}" @if($area->id == $area_id) selected="selected" @endif>{{$area->name}}</option>
+                    @endforeach
+                </select>
+              </div>
             <div class="col-2">
               <button type="submit" class="btn btn-primary btn-sm">@lang('adminLang.apply-filter')</button>
               <a class="btn btn-warning btn-sm" href="{{route($baseRoute . '.index')}}">@lang('adminLang.reset')</a>

@@ -42,7 +42,7 @@ Route::post('/stock/{product}/update/{stock}', 'Admin\StockController@update')->
 Route::post('/stock/{product}/delete/{stock}', 'Admin\StockController@delete')->name('admin.stock.delete');
 
 // Salesman
-Route::get('/salesman', 'Admin\SalesmanController@index')->name('admin.salesman.index');
+Route::get('/salesman/{area?}', 'Admin\SalesmanController@index')->name('admin.salesman.index');
 Route::get('/salesman/create', 'Admin\SalesmanController@create')->name('admin.salesman.create');
 Route::post('/salesman/store', 'Admin\SalesmanController@store')->name('admin.salesman.store');
 Route::get('/salesman/show/{salesman}', 'Admin\SalesmanController@show')->name('admin.salesman.show');

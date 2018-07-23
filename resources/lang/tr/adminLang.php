@@ -56,6 +56,7 @@ return [
     'status' => 'Durum',
     'password' => 'Şifre',
     'address' => 'Adres',
+    'all' => 'Hepsi',
 
 
 ];

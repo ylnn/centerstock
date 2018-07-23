@@ -21,6 +21,7 @@ class SalesmanController extends Controller
         $q = request('q');
         $sort = request('sort') ?? '';
         $direction = request('direction') ?? '';
+        $area_id = request('area_id') ?? '';
 
         # start query
         $query = (self::model)::whereNotNull('id');
@@ -31,13 +32,17 @@ class SalesmanController extends Controller
         # if query parameter exists
         $query = $q ? $query->where('name', 'like', '%' . $q . '%') : $query;
 
+        if($area_id){
+            $query = $query->where('area_id', $area_id);
+        }
+
         $records = $query->paginate(self::pagination)->appends(request()->query());;
 
         $baseRoute = self::baseRoute;
 
         $areas = Area::orderBy('name', 'ASC')->get();
         
-        return view(self::baseRoute.".index", compact('records', 'q', 'p', 'sort', 'direction', 'baseRoute', 'areas'));
+        return view(self::baseRoute.".index", compact('records', 'q', 'p', 'sort', 'direction', 'baseRoute', 'areas', 'area_id'));
 
     }
 

@@ -8,11 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 $factory->define(Salesman::class, function(Faker $faker){
 
-    if (!Area::first()) {
-        $area = factory(Area::class)->create();
-    } else {
-        $area = Area::inRandomOrder()->first();
-    }
+    $area = factory(Area::class)->create();
 
     return [
         'name' => $faker->name,
