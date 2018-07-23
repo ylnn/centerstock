@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\App;
+// dd(App::environment());
+
 Route::get('/', 'Admin\DashboardController@index')->name('dashboard');
 
 // Customer
@@ -45,7 +48,7 @@ Route::post('/stock/{product}/delete/{stock}', 'Admin\StockController@delete')->
 Route::get('/salesman/{area?}', 'Admin\SalesmanController@index')->name('admin.salesman.index');
 Route::get('/salesman/create', 'Admin\SalesmanController@create')->name('admin.salesman.create');
 Route::post('/salesman/store', 'Admin\SalesmanController@store')->name('admin.salesman.store');
-Route::get('/salesman/show/{salesman}', 'Admin\SalesmanController@show')->name('admin.salesman.show');
-Route::get('/salesman/edit/{salesman}', 'Admin\SalesmanController@edit')->name('admin.salesman.edit');
-Route::post('/salesman/update/{salesman}', 'Admin\SalesmanController@update')->name('admin.salesman.update');
-Route::post('/salesman/delete/{salesman}', 'Admin\SalesmanController@delete')->name('admin.salesman.delete');
+Route::get('/salesman/show/{user}', 'Admin\SalesmanController@show')->name('admin.salesman.show');
+Route::get('/salesman/edit/{user}', 'Admin\SalesmanController@edit')->name('admin.salesman.edit');
+Route::post('/salesman/update/{user}', 'Admin\SalesmanController@update')->name('admin.salesman.update');
+Route::post('/salesman/delete/{user}', 'Admin\SalesmanController@delete')->name('admin.salesman.delete');

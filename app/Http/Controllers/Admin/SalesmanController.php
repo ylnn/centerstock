@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Area;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Salesman;
-use App\Area;
+use Illuminate\Support\Facades\Hash;
 
 
 class SalesmanController extends Controller
 {
     const baseRoute = 'admin.salesman';
     const indexRoute = 'admin.salesman.index';
-    const model = 'App\Salesman';
+    const model = 'App\User';
     const pagination = 15;
 
     public function index()
@@ -56,8 +57,8 @@ class SalesmanController extends Controller
     {
         $this->validate($request, [
             'email' => 'email|required',
-            'password' => 'required|string|min:8|max:20',
-            'name' => 'string|required|unique:salesmen,name',
+            'password' => 'required|min:8|max:20',
+            'name' => 'string|required|unique:users,name',
             'status' => 'boolean|required',
             'area_id' => 'integer|required|exists:areas,id',
             'phone' => 'string|nullable',
@@ -65,7 +66,18 @@ class SalesmanController extends Controller
             'desc' => 'string|nullable',
         ]);
 
-        Salesman::create($request->only('email', 'password', 'name', 'status', 'area_id', 'phone', 'address', 'desc'));
+
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'status' => $request->status,
+            'area_id' => $request->area_id,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'desc' => $request->desc,
+        ]);
 
         showMessage(trans('adminLang.saved'), 'success');
 
@@ -74,22 +86,22 @@ class SalesmanController extends Controller
         return redirect()->route(self::indexRoute);
     }
     
-    public function show(Salesman $salesman)
+    public function show(User $user)
     {
-        return view('admin.salesman.show', ['record' => $salesman, 'baseRoute' => self::baseRoute]);
+        return view('admin.salesman.show', ['record' => $user, 'baseRoute' => self::baseRoute]);
     }
 
-    public function edit(Salesman $salesman)
+    public function edit(User $user)
     {
         $areas = Area::orderBy('name', 'ASC')->get();
-        return view('admin.salesman.edit', ['record' => $salesman, 'baseRoute' => self::baseRoute, 'areas' => $areas]);
+        return view('admin.salesman.edit', ['record' => $user, 'baseRoute' => self::baseRoute, 'areas' => $areas]);
     }
 
-    public function update(Request $request, Salesman $salesman)
+    public function update(Request $request, User $user)
     {
         $this->validate($request, [
+            'name' => 'string|required',
             'email' => 'email|required',
-            'name' => 'string|required|unique:salesmen,name',
             'status' => 'boolean|required',
             'area_id' => 'integer|required|exists:areas,id',
             'phone' => 'string|nullable',
@@ -97,7 +109,16 @@ class SalesmanController extends Controller
             'desc' => 'string|nullable',
         ]);
 
-        $salesman->update($request->only('email', 'name', 'status', 'area_id', 'phone', 'address', 'desc'));
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'status' => $request->status,
+            'area_id' => $request->area_id,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'desc' => $request->desc,
+        ]);
 
         showMessage(trans('adminLang.saved'), 'success');
 
@@ -106,9 +127,9 @@ class SalesmanController extends Controller
         return redirect()->route(self::indexRoute);
     }
 
-    public function delete(Request $request, Salesman $salesman)
+    public function delete(Request $request, User $user)
     {
-       if ($salesman->delete()){
+       if ($user->delete()){
             showMessage(trans('adminLang.deleted'), 'success');
        } else {
             showMessage(trans('adminLang.cantdeleted'), 'success');

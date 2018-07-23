@@ -18,7 +18,14 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->enum('type', ['SALESMAN', 'ADMIN', 'STORE'])->default('SALESMAN')->index();
+            $table->boolean('status')->default(0);
+            $table->unsignedInteger('area_id');
+            $table->string('phone')->nullable();
+            $table->text('address')->nullable();
+            $table->text('desc')->nullable();
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

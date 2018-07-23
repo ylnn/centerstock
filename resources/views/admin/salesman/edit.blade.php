@@ -10,8 +10,8 @@
                 <div class="form-group">
                     <label for="status">@lang('adminLang.status')</label>
                     <select name="status" id="status" class="form-control">
-                        <option value="1" @if($record->status) selected="selected" @endif>Aktif</option>
-                        <option value="0" @if($record->status) selected="selected" @endif>Deaktif</option>
+                        <option value="1" @if($record->status == 1) selected="selected" @endif>Aktif</option>
+                        <option value="0" @if($record->status == 0) selected="selected" @endif>Deaktif</option>
                     </select>
                 </div>
                 <div class="form-group">

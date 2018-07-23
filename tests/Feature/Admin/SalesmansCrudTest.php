@@ -6,12 +6,13 @@ use App\Salesman;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Area;
+use App\User;
 
 class SalesmansCrudTest extends TestCase
 {
-    const model = "App\Salesman";
     const baseRoute = "admin.salesman";
-    const singularName = "salesman";
+    const singularName = "user";
+    const model = "App\User";
     /**
      * is index page working test
      *
@@ -19,12 +20,10 @@ class SalesmansCrudTest extends TestCase
      */
     public function testSalesmansIndexShowTest()
     {
-        $records = factory(self::model, 3)->create();
+        $records = factory(User::class)->create();
         $response = $this->get(route(self::baseRoute . '.index'));
         $response->assertStatus(200);
-        for ($i=0; $i < 3; $i++) {
-            $response->assertSee(e($records[$i]->name));
-        }
+        $response->assertSee(e($records->name));
     }
 
     /**
@@ -94,21 +93,16 @@ class SalesmansCrudTest extends TestCase
     {
         $record = factory(self::model)->create();
 
-        $area = Area::first();
-        if(!$area) {
-            $area = factory(Area::class)->create();
-        }
-
-        $this->post(route(self::baseRoute . '.update', [self::singularName => $record->id]), [
+        $response = $this->post(route(self::baseRoute . '.update', [self::singularName => $record->id]), [
             'name' => $record->name . "_test",
             'email' => $record->email,
-            'password' => $record->password,
-            'status' => 1,
+            'status' => $record->status,
             'area_id' => $record->area_id,
             'phone' => $record->phone,
             'address' => $record->address,
             'desc' => $record->desc,
         ]);
+
         $this->assertTrue((self::model)::where('id', $record->id)->where('name', $record->name . "_test")->exists());
     }
 
@@ -124,27 +118,4 @@ class SalesmansCrudTest extends TestCase
         $this->assertFalse((self::model)::where('id', $record->id)->exists());
     }
 
-    /**
-     * is query with area_id feature working test
-     *
-     * @return void
-     */
-    public function testSalesmanFilterWithArea()
-    {
-        // create record
-        $record = factory(self::model)->create();
-        
-        //create record for don't see
-        $record2 = factory(self::model)->create();
-
-        //get index page with area name query
-        $response = $this->get(route(self::baseRoute . '.index', ['area_id' => $record->area_id]));
-
-        //assert see name and area name
-        $response->assertSeeText(e($record->area->name));
-        
-        //assert dont see name and area name
-        $response->assertDontSeeText(e($record2->area->name));
-
-    }
 }
