@@ -23,7 +23,7 @@ class ApiController extends Controller
         if (strlen($customerName) < 3) {
             return response()->json('Not Found')->setStatusCode(404);
         }
-        $customers = Customer::where('name', 'like', '%'.$customerName.'%')->get();
+        $customers = Customer::where('name', 'like', '%'.$customerName.'%')->take(10)->get();
         return CustomerResource::collection($customers);
     }
 
