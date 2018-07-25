@@ -4,41 +4,41 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Customer;
-use App\Http\Resources\Customer as CustomerResource;
+use App\Product;
+use App\Http\Resources\Product as ProductResource;
 use Illuminate\Support\Facades\Validator;
 
 class ProductApiController extends Controller
 {
     /**
-     * Customer Search with Name
+     * Product Search with Name
      *
      * @param Request $request
-     * @param [type] $customerName
+     * @param [type] $productName
      * @return void
      */
-    public function customerSearch(Request $request, $customerName)
+    public function productSearch(Request $request, $productName)
     {
-        if (strlen($customerName) < 3) {
+        if (strlen($productName) < 3) {
             return response()->json('Not Found')->setStatusCode(404);
         }
-        $customers = Customer::where('name', 'like', '%'.$customerName.'%')->take(10)->get();
-        return CustomerResource::collection($customers);
+        $products = Product::where('name', 'like', '%'.$productName.'%')->take(10)->get();
+        return ProductResource::collection($products);
     }
 
     /**
-     * Customer Detail with ID
+     * Product Detail with ID
      *
      * @param Request $request
-     * @param Customer $customer
+     * @param Product $product
      * @return void
      */
-    public function customerDetail(Request $request, Customer $customer)
+    public function productDetail(Request $request, Product $product)
     {
-        if(!$customer){
+        if(!$product){
             return response()->json('Not Found')->setStatusCode(404);
         }
 
-        return new CustomerResource($customer);
+        // return new Product($product);
     }
 }

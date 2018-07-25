@@ -10,4 +10,4 @@ Route::get('/customer/search/{customerName}', 'Api\CustomerApiController@custome
 
 Route::get('/customer/detail/{customer}', 'Api\CustomerApiController@customerDetail')->name('api.customer.detail');
 
-// Route::get('/product/search/{productName}', 'Api\ApiController@productSearch')->name('api.product.search');
+Route::get('/product/search/{productName}', 'Api\ProductApiController@productSearch')->name('api.product.search');
