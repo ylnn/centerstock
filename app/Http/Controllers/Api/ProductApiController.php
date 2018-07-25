@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Customer;
-use App\Http\Resources\CustomerCollection;
 use App\Http\Resources\Customer as CustomerResource;
 use Illuminate\Support\Facades\Validator;
 
-class ApiController extends Controller
+class ProductApiController extends Controller
 {
     /**
      * Customer Search with Name
