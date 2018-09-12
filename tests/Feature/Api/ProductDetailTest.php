@@ -1,8 +1,9 @@
 <?php
 namespace Tests\Feature\Api;
+
 use Tests\TestCase;
 
-class ProductDetailTest extends TestCase 
+class ProductDetailTest extends TestCase
 {
     /**
      * product detail endpoint WORKING test
@@ -21,9 +22,9 @@ class ProductDetailTest extends TestCase
         $response = $this->get(route('api.product.detail', ['productId' => $product->id]));
         $response->assertStatus(200);
         $response->assertJsonFragment([
-            'serial' => $stock->serial
+            'serial' => "$stock->serial"
         ]);
-    }    
+    }
 
     /**
      * product detail endpoint FAIL (Empty) test
