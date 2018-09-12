@@ -8,7 +8,7 @@ use App\Customer;
 use App\Http\Resources\Customer as CustomerResource;
 use Illuminate\Support\Facades\Validator;
 
-class CustomerApiController extends Controller
+class CustomerSearchController extends Controller
 {
     /**
      * Customer Search with Name
@@ -17,7 +17,7 @@ class CustomerApiController extends Controller
      * @param [type] $customerName
      * @return void
      */
-    public function customerSearch(Request $request, $customerName)
+    public function index(Request $request, $customerName)
     {
         if (strlen($customerName) < 3) {
             return response()->json('Not Found')->setStatusCode(404);
@@ -35,7 +35,7 @@ class CustomerApiController extends Controller
      */
     public function customerDetail(Request $request, Customer $customer)
     {
-        if(!$customer){
+        if (!$customer) {
             return response()->json('Not Found')->setStatusCode(404);
         }
 
