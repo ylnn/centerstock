@@ -9,7 +9,7 @@ class CustomerSearchTest extends TestCase
 {
     
     /**
-     * customer search endpoint WORKING test 
+     * customer search endpoint WORKING test
      *
      * @return void
      */
@@ -24,18 +24,15 @@ class CustomerSearchTest extends TestCase
 
 
     /**
-     * customer search endpoint FAIL (not found) test 
+     * customer search endpoint FAIL (not found) test
      *
      * @return void
      */
-    public function testFailCustomerSearchEndpoint()
+    public function testFailForMinimum3CharValidationCustomerSearchEndpoint()
     {
         $customer = factory('App\Customer')->create();
-        $customerName = str_limit($customer->name, 2, '');
+        $customerName = "xx";
         $response = $this->get(route('api.customer.search', ['customerName' => $customerName]));
         $response->assertStatus(404);
     }
-
-    
-
 }
