@@ -16,13 +16,14 @@ use App\Area;
 
 $factory->define(App\User::class, function (Faker $faker) {
     $area = Area::inRandomOrder()->first();
-    if(!$area){
+    if (!$area) {
         $area = factory(Area::class)->create();
     }
     return [
         'name' => $faker->name(),
         'status' => 1,
         'email' => $faker->unique()->safeEmail,
+        'api_token' => str_random(82),
         'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
         'area_id' => $area->id,
         'phone' => $faker->phoneNumber,
