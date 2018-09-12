@@ -18,12 +18,13 @@ class AreasCrudTest extends TestCase
      */
     public function testAreasIndexShowTest()
     {
-        $records = factory(self::model, 3)->create();
+        $first = Area::create(['name' => "AAAA"]);
+        $second = Area::create(['name' => "BBBB"]);
+
         $response = $this->get(route(self::baseRoute . '.index'));
         $response->assertStatus(200);
-        for ($i=0; $i < 3; $i++) {
-            $response->assertSee(e($records[$i]->name));
-        }
+        $response->assertSee($first->name);
+        $response->assertSee($second->name);
     }
 
     /**
@@ -57,7 +58,7 @@ class AreasCrudTest extends TestCase
     public function testShowAreaPage()
     {
         $record = factory(self::model)->create();
-        $response = $this->get(route(self::baseRoute . '.show',[self::singularName => $record->id]));
+        $response = $this->get(route(self::baseRoute . '.show', [self::singularName => $record->id]));
         $response->assertStatus(200);
         $response->assertSee(e($record->name));
     }
@@ -70,7 +71,7 @@ class AreasCrudTest extends TestCase
     public function testEditAreaPage()
     {
         $record = factory(self::model)->create();
-        $response = $this->get(route(self::baseRoute . '.edit',[self::singularName => $record->id]));
+        $response = $this->get(route(self::baseRoute . '.edit', [self::singularName => $record->id]));
         $response->assertStatus(200);
         $response->assertSee(e($record->name));
     }
