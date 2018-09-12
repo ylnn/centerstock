@@ -15,4 +15,9 @@ class Customer extends Model
     {
         return $this->belongsTo('App\Area', 'area_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Customer');
+    }
 }

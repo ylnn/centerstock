@@ -33,7 +33,18 @@ class User extends Authenticatable
         return $this->belongsTo('App\Area');
     }
 
-    protected static function boot(){
+    public function customers()
+    {
+        return $this->hasMany('App\Customer');
+    }
+
+    public function addCustomer($customer)
+    {
+        return $this->customers()->save($customer);
+    }
+
+    protected static function boot()
+    {
         parent::boot();
         static::addGlobalScope(new SalesmanScope);
     }
