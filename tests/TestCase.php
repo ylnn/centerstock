@@ -9,6 +9,13 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 abstract class TestCase extends BaseTestCase
 {
     use RefreshDatabase;
-    use DatabaseMigrations;
+    // use DatabaseMigrations;
     use CreatesApplication;
+
+    public function setUp()
+    {
+        // dd(env('DB_CONNECTION')); // these are correct
+        // dd(env('DB_DATABASE'));
+        parent::setUp();
+    }
 }
