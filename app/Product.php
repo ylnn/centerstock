@@ -12,4 +12,9 @@ class Product extends Model
     {
         return $this->hasMany('App\Stock');
     }
+
+    public function addStock(Stock $stock)
+    {
+        return $this->stocks()->save($stock);
+    }
 }
