@@ -15,6 +15,9 @@ class CustomerSearchTest extends TestCase
      */
     public function testCustomerSearchEndpoint()
     {
+        $user = factory('App\User')->create();
+        $this->actingAs($user, 'api');
+
         $customer = factory('App\Customer')->create();
         $customerName = str_limit($customer->name, 3, '');
         $response = $this->get(route('api.customer.search', ['customerName' => $customerName]));
@@ -30,6 +33,9 @@ class CustomerSearchTest extends TestCase
      */
     public function testFailForMinimum3CharValidationCustomerSearchEndpoint()
     {
+        $user = factory('App\User')->create();
+        $this->actingAs($user, 'api');
+        
         $customer = factory('App\Customer')->create();
         $customerName = "xx";
         $response = $this->get(route('api.customer.search', ['customerName' => $customerName]));

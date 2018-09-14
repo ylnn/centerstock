@@ -12,6 +12,9 @@ class ProductDetailTest extends TestCase
      */
     public function testProductDetailEndpoint()
     {
+        $user = factory('App\User')->create();
+        $this->actingAs($user, 'api');
+        
         $product = factory('App\Product')->create();
         $stock = factory('App\Stock')->create();
 
@@ -33,6 +36,9 @@ class ProductDetailTest extends TestCase
      */
     public function testFailProductDetailEndpoint()
     {
+        $user = factory('App\User')->create();
+        $this->actingAs($user, 'api');
+        
         $product = factory('App\Product')->create();
         $stock = factory('App\Stock')->create();
 
