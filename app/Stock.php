@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Stock extends Model
 {
+    protected $fillable = ['serial', 'quantity', 'purchase_price', 'sale_price', 'user_id'];
+
     protected $dates = ['expiration_date'];
     
     public function product()
