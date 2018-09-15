@@ -70,6 +70,56 @@ class StocksCrudTest extends TestCase
         $this->assertTrue((self::model)::where(['serial' => $record->serial, 'product_id' => $record->product_id])->exists());
     }
 
+    public function testIsPriceInsertAndShowingCorrectlyOnStoreMethod()
+    {
+        // make stock
+        $record = factory(self::model)->make([
+            'purchase_price' => 10.42,
+            'sale_price' => 15.77
+        ]);
+
+        // post stock data
+        $this->post(route(self::baseRoute. '.store', ['product' => $record->product_id]), $record->toArray());
+
+        $response = $this->get(route('admin.stock.index', ['product' => $record->product_id]));
+
+        $response->assertSee('10.42');
+        $response->assertSee('15.77');
+    }
+
+    public function testIsPriceInsertAndShowingCorrectlyOnUpdateMethod()
+    {
+        // $this->markTestSkipped();
+        // make stock
+        $record = factory(self::model)->make([
+            'serial' => 10928300000,
+            'purchase_price' => 10.42,
+            'sale_price' => 15.77
+        ]);
+
+        // create stock record
+        $storeResponse = $this->post(route(self::baseRoute. '.store', ['product' => $record->product_id]), $record->toArray());
+
+
+
+        // make update
+        $storedRecord = Stock::where('serial', 10928300000)->first();
+        $storedRecord->purchase_price = '12.44';
+        $storedRecord->sale_price = '19.40';
+
+        $this->followingRedirects();
+
+        $updateResponse = $this->post(route(self::baseRoute. '.update', ['stock' => $storedRecord->id]), $storedRecord->toArray());
+
+        $updateResponse->assertSee('Kaydedildi');
+
+        // check change in stock index page
+        $response = $this->get(route('admin.stock.index', ['product' => $storedRecord->product_id]));
+
+        $response->assertSee('12.44');
+        $response->assertSee('19.4');
+    }
+
     /**
      * is show page working test
      *
@@ -81,7 +131,7 @@ class StocksCrudTest extends TestCase
         $record = factory(self::model)->create();
 
         // get show page
-        $response = $this->get(route(self::baseRoute . '.show',['product' => $record->product_id, self::singularName => $record->id]));
+        $response = $this->get(route(self::baseRoute . '.show', ['product' => $record->product_id, self::singularName => $record->id]));
 
         //check status
         $response->assertStatus(200);
@@ -104,7 +154,7 @@ class StocksCrudTest extends TestCase
         $record = factory(self::model)->create();
 
         //get edit page
-        $response = $this->get(route(self::baseRoute . '.edit',['product' => $record->product_id, self::singularName => $record->id]));
+        $response = $this->get(route(self::baseRoute . '.edit', ['product' => $record->product_id, self::singularName => $record->id]));
 
         //check status
         $response->assertStatus(200);
@@ -131,11 +181,11 @@ class StocksCrudTest extends TestCase
 
 
         //post update data
-        $this->post(route('admin.stock.update', ['product' => $record->product_id,  self::singularName => $record->id]), $record->toArray());
+        $this->post(route('admin.stock.update', [self::singularName => $record->id]), $record->toArray());
 
         // check record is updated in db
 
-        $this->assertTrue((self::model)::where('id', $record->id)->where('quantity', $orginalValue + 55 )->exists());
+        $this->assertTrue((self::model)::where('id', $record->id)->where('quantity', $orginalValue + 55)->exists());
     }
 
     /**
