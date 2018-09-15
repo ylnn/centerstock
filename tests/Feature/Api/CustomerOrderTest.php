@@ -31,6 +31,11 @@ class CustomerOrderTest extends TestCase
         ]);
     }
 
+    /**
+     * is user can retrieve own order list and not others
+     *
+     * @return void
+     */
     public function testIsUserCanRetrieveOwnOrdersList()
     {
         //when
@@ -39,6 +44,8 @@ class CustomerOrderTest extends TestCase
 
 
         //given
+        //add new order belongsto me
+        //add new order belongsto another user
         $anotherUser = factory('App\User')->create();
 
         $myCustomer = factory('App\Customer')->create();
@@ -52,8 +59,6 @@ class CustomerOrderTest extends TestCase
 
         $myCustomer->addOrder($myOrder, $user);
         $anotherCustomer->addOrder($anotherOrder, $anotherUser);
-        //add new order belongsto me
-        //add new order belongsto another user
 
         //then
         //see my order
