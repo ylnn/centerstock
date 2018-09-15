@@ -41,8 +41,8 @@
                   <td>{{$record->serial}}</td>
                   <td>{{optional($record->product)->name}}</td>
                   <td>{{$record->quantity}}</td>
-                  <td>{{ $record->purchase_price}}</td>
-                  <td>{{$record->sale_price}}</td>
+                  <td>{{ $record->purchase_price / 100}}</td>
+                  <td>{{$record->sale_price / 100}}</td>
                   <td>{{ \Carbon\Carbon::parse($record->expiration_at)->format('d/m/Y') }}</td>
                   <td class="">
                     <div class="d-flex justify-content-end">

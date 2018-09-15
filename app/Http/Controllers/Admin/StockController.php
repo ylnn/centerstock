@@ -56,13 +56,12 @@ class StockController extends Controller
 
     public function store(Request $request)
     {
-
         $this->validate($request, [
             'serial' => 'integer|required|unique:stocks,serial',
             'product_id' => 'integer',
             'quantity' => 'integer|required',
-            'purchase_price' => "required|regex:/^\d*(\.\d{1,2})?$/",
-            'sale_price' => "required|regex:/^\d*(\.\d{1,2})?$/",
+            'purchase_price' => "required",
+            'sale_price' => "required",
             'user_id' => 'integer|required|exists:users,id',
             'expiration_at' => 'date|nullable',
         ]);
@@ -71,8 +70,8 @@ class StockController extends Controller
         $stock->serial = $request->serial;
         $stock->product_id = $request->product_id;
         $stock->quantity = $request->quantity;
-        $stock->purchase_price = $request->purchase_price;
-        $stock->sale_price = $request->sale_price;
+        $stock->purchase_price = $request->purchase_price * 100;
+        $stock->sale_price = $request->sale_price * 100;
         $stock->user_id = $request->user_id;
         $stock->expiration_at = $request->expiration_at;
         $stock->save();
@@ -96,22 +95,19 @@ class StockController extends Controller
         return view('admin.stock.edit', ['record' => $stock, 'product' => $product, 'baseRoute' => self::baseRoute]);
     }
 
-    public function update(Request $request, Product $product, Stock $stock)
+    public function update(Request $request, Stock $stock)
     {
-
         $this->validate($request, [
-            'product_id' => 'integer',
             'quantity' => 'integer|required',
-            'purchase_price' => "required|regex:/^\d*(\.\d{1,2})?$/",
-            'sale_price' => "required|regex:/^\d*(\.\d{1,2})?$/",
+            'purchase_price' => "required|numeric",
+            'sale_price' => "required|numeric",
             'user_id' => 'integer|required|exists:users,id',
             'expiration_at' => 'date|nullable',
         ]);
 
-        $stock->product_id = $product->id;
         $stock->quantity = $request->quantity;
-        $stock->purchase_price = $request->purchase_price;
-        $stock->sale_price = $request->sale_price;
+        $stock->purchase_price = $request->purchase_price * 100;
+        $stock->sale_price = $request->sale_price * 100;
         $stock->user_id = $request->user_id;
         $stock->expiration_at = $request->expiration_at;
         $stock->save();

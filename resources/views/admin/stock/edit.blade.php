@@ -7,11 +7,11 @@
                 <h2>@lang('adminLang.stock') @lang('adminLang.edit')</h2>
                 <h4 class="alert alert-info">{{$product->name}}</h4>
             </div>
-        <form method="POST" action="{{ route($baseRoute . '.update', ['product' => $product->id, 'stock' => $record->id]) }}">
+        <form method="POST" action="{{ route($baseRoute . '.update', ['stock' => $record->id]) }}">
                 {{csrf_field()}}
                 <div class="form-group">
                     <label for="serial">@lang('adminLang.serial')</label>
-                    <input type="text" class="form-control" id="serial" name="serial" value="{{$record->serial}}" autofocus required>
+                    <p><b>{{$record->serial}}</b></p>
                 </div>
                 <div class="form-group">
                     <label for="quantity">@lang('adminLang.quantity')</label>
@@ -19,11 +19,11 @@
                 </div>
                 <div class="form-group">
                     <label for="purchase_price">@lang('adminLang.purchase_price')</label>
-                    <input type="text" class="form-control" id="purchase_price" name="purchase_price" value="{{$record->purchase_price}}">
+                    <input type="text" class="form-control" id="purchase_price" name="purchase_price" value="{{$record->purchase_price / 100}}">
                 </div>
                 <div class="form-group">
                     <label for="sale_price">@lang('adminLang.sale_price')</label>
-                    <input type="text" class="form-control" id="sale_price" name="sale_price" value="{{$record->sale_price}}">
+                    <input type="text" class="form-control" id="sale_price" name="sale_price" value="{{$record->sale_price / 100}}">
                 </div>
                 <div class="form-group">
                     <label for="user_id">USER (DEĞİŞECEK)</label>
