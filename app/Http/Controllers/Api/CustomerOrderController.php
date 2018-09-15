@@ -28,4 +28,15 @@ class CustomerOrderController extends Controller
 
         return $customer->addOrder($order, $request->user());
     }
+
+    /**
+     * User get own order
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function index(Request $request)
+    {
+        return $request->user()->orders()->get();
+    }
 }
