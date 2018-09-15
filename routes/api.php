@@ -14,4 +14,7 @@ Route::middleware(['auth:api'])->group(function () {
     // Product
     Route::get('/product/search/{productName}', 'Api\ProductApiController@productSearch')->name('api.product.search');
     Route::get('/product/detail/{product}', 'Api\ProductApiController@productDetail')->name('api.product.detail');
+    
+    // Order
+    Route::get('/customer-order/create/{customer}', 'Api\CustomerOrderController@create')->name('api.order.create');
 });
