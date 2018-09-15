@@ -62,7 +62,7 @@ class CustomerOrderTest extends TestCase
         //then
         //see my order
         //dont see another users order
-        $response = $this->post(route('api.order.index'));
+        $response = $this->post(route('api.customer.orders'));
         $response->assertStatus(200);
         $response->assertJson([[
             'customer_id' => $myCustomer->id,
@@ -88,7 +88,7 @@ class CustomerOrderTest extends TestCase
         $myOrder->status = Order::STATUS['OPEN'];
         $myCustomer->addOrder($myOrder, $user);
 
-        $response = $this->post(route('api.order.index', ['status' => Order::STATUS['OPEN']]));
+        $response = $this->post(route('api.customer.orders', ['status' => Order::STATUS['OPEN']]));
         $response->assertStatus(200);
         $response->assertJson([[
             'customer_id' => $myCustomer->id,
@@ -117,7 +117,7 @@ class CustomerOrderTest extends TestCase
         $myCustomer->addOrder($myOrder, $user);
 
 
-        $response = $this->post(route('api.order.index', ['status' => Order::STATUS['WAITING']]));
+        $response = $this->post(route('api.customer.orders', ['status' => Order::STATUS['WAITING']]));
         $response->assertStatus(200);
         $response->assertJson([[
             'customer_id' => $myCustomer->id,
@@ -136,7 +136,7 @@ class CustomerOrderTest extends TestCase
         $user = factory('App\User')->create();
         $this->actingAs($user, 'api');
 
-        $response = $this->post(route('api.order.index', ['status' => 'INCORRECT_STATUS']));
+        $response = $this->post(route('api.customer.orders', ['status' => 'INCORRECT_STATUS']));
 
         $response->assertStatus(422);
     }
