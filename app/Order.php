@@ -9,6 +9,7 @@ class Order extends Model
     const STATUS = [
         "OPEN" => "OPEN",
         "WAITING" => "WAITING",
+        "DENIED" => "DENIED",
         "APPROVED" => "APPROVED",
         "SHIPPED" => "SHIPPED",
         "DONE" => "DONE"
@@ -39,8 +40,11 @@ class Order extends Model
         return $query->where('user_id', $user->id);
     }
 
-    public function scopeCustomer($query, Customer $customer)
+    public function scopeCustomer($query, Customer $customer = null)
     {
+        if (is_null($customer)) {
+            return $query;
+        }
         return $query->where('customer_id', $customer->id);
     }
 
