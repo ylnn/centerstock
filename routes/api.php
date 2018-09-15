@@ -17,4 +17,5 @@ Route::middleware(['auth:api'])->group(function () {
     
     // Order
     Route::get('/customer-order/create/{customer}', 'Api\CustomerOrderController@create')->name('api.order.create');
+    Route::get('/customer-orders', 'Api\CustomerOrderController@index')->name('api.order.index');
 });
