@@ -6,6 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    const STATUS = [
+        "OPEN",
+        "WAITING",
+        "APPROVED",
+        "SHIPPED",
+        "DONE"
+    ];
+
     protected $fillable = ['status', 'customer_id', 'user_id'];
 
     public function customer()
