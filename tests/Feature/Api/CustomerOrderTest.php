@@ -18,9 +18,7 @@ class CustomerOrderTest extends TestCase
 
         $customer = factory('App\Customer')->create();
 
-        $order = Order::make([
-            'user_id' => $user->id
-        ]);
+        $order = Order::make();
 
         $customer->addOrder($order, $user);
 
@@ -31,5 +29,40 @@ class CustomerOrderTest extends TestCase
             'status' => 'OPEN',
             'user_id' => $user->id,
         ]);
+    }
+
+    public function testIsUserCanRetrieveOwnOrdersList()
+    {
+        //when
+        $user = factory('App\User')->create();
+        $this->actingAs($user, 'api');
+
+
+        //given
+        $anotherUser = factory('App\User')->create();
+
+        $myCustomer = factory('App\Customer')->create();
+        $anotherCustomer = factory('App\Customer')->create();
+
+        $user->addCustomer($myCustomer);
+        $anotherUser->addCustomer($anotherCustomer);
+
+        $myOrder = Order::make();
+        $anotherOrder = Order::make();
+
+        $myCustomer->addOrder($myOrder, $user);
+        $anotherCustomer->addOrder($anotherOrder, $anotherUser);
+        //add new order belongsto me
+        //add new order belongsto another user
+
+        //then
+        //see my order
+        //dont see another users order
+        $response = $this->get(route('api.order.index'));
+        $response->assertStatus(200);
+        $response->assertJson([[
+            'customer_id' => $myCustomer->id,
+            'user_id' => $user->id,
+        ]]);
     }
 }
