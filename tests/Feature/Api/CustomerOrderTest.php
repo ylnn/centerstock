@@ -42,7 +42,6 @@ class CustomerOrderTest extends TestCase
         $user = factory('App\User')->create();
         $this->actingAs($user, 'api');
 
-
         //given
         //add new order belongsto me
         //add new order belongsto another user
@@ -63,11 +62,103 @@ class CustomerOrderTest extends TestCase
         //then
         //see my order
         //dont see another users order
-        $response = $this->get(route('api.order.index'));
+        $response = $this->post(route('api.order.index'));
         $response->assertStatus(200);
         $response->assertJson([[
             'customer_id' => $myCustomer->id,
             'user_id' => $user->id,
+        ]]);
+    }
+
+    public function testIsUserCanRetrieveOwnOrdersListWithStatusEqualsOPEN()
+    {
+        //when
+        $user = factory('App\User')->create();
+        $this->actingAs($user, 'api');
+
+        //add new order belongsto me - OPEN STATUS
+        $myCustomer = factory('App\Customer')->create();
+        $user->addCustomer($myCustomer);
+        $myOrder = Order::make();
+        $myOrder->status = Order::STATUS['OPEN'];
+        $myCustomer->addOrder($myOrder, $user);
+
+        $response = $this->post(route('api.order.index', ['status' => Order::STATUS['OPEN']]));
+        $response->assertStatus(200);
+        $response->assertJson([[
+            'customer_id' => $myCustomer->id,
+            'status' => Order::STATUS['OPEN'],
+            'user_id' => $user->id,
+        ]]);
+    }
+
+
+    public function testIsUserCanRetrieveOwnOrdersListWithStatusEqualsWAITING()
+    {
+        //when
+        $user = factory('App\User')->create();
+        $this->actingAs($user, 'api');
+
+        //add new order belongsto me - WAITING STATUS
+        $myCustomer = factory('App\Customer')->create();
+        $user->addCustomer($myCustomer);
+        $myOrder = Order::make();
+        $myOrder->status = Order::STATUS['WAITING'];
+        $myCustomer->addOrder($myOrder, $user);
+
+
+        $response = $this->post(route('api.order.index', ['status' => Order::STATUS['WAITING']]));
+        $response->assertStatus(200);
+        $response->assertJson([[
+            'customer_id' => $myCustomer->id,
+            'status' => Order::STATUS['WAITING'],
+            'user_id' => $user->id,
+        ]]);
+    }
+
+    /**
+     * in order list method: is status validation working
+     *
+     * @return void
+     */
+    public function testIsStatusValidationIsWorking()
+    {
+        $user = factory('App\User')->create();
+        $this->actingAs($user, 'api');
+
+        $response = $this->post(route('api.order.index', ['status' => 'INCORRECT_STATUS']));
+
+        $response->assertStatus(422);
+    }
+
+    public function testIsUserCanSeeSpecificOrderForCustomer()
+    {
+        //when
+        $user = factory('App\User')->create();
+        $this->actingAs($user, 'api');
+
+        //given
+        $myCustomer = factory('App\Customer')->create();
+        $user->addCustomer($myCustomer);
+        $myOrder = Order::make();
+        $myCustomer->addOrder($myOrder, $user);
+
+        $customer2 = factory('App\Customer')->create();
+        $user->addCustomer($customer2);
+        $order2 = Order::make();
+        $customer2->addOrder($order2, $user);
+
+
+        $response = $this->post(route('api.customer.orders', [
+            'customer_id' => $myCustomer->id
+            ]));
+        $response->assertStatus(200);
+        $response->assertJson([[
+            'customer_id' => $myCustomer->id,
+            'user_id' => $user->id,
+        ]]);
+        $response->assertJsonMissing([[
+            'customer_id' => $customer2->id,
         ]]);
     }
 }
