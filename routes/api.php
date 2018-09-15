@@ -16,10 +16,12 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/product/detail/{product}', 'Api\ProductApiController@productDetail')->name('api.product.detail');
     
     // Order
-    Route::get('/customer-order/create/{customer}', 'Api\UserOrderController@create')->name('api.order.create');
-    Route::post('/customer-orders-by-user', 'Api\UserOrderController@index')->name('api.order.index');
+    Route::get('/customer-order/create/{customer}', 'Api\OrderByUserController@create')->name('api.order.create');
+    Route::post('/customer-orders-by-user', 'Api\OrderByUserController@index')->name('api.order.index');
 
-    Route::post('/customer-orders', 'Api\CustomerOrderController@index')->name('api.customer.orders');
+    // Order Index
+    Route::post('/customer-orders-by-customer', 'Api\OrderByCustomerController@index')->name('api.customer.orders');
+    // Route::post('/customer-orders', 'Api\CustomerOrderController@index')->name('api.customer.orders');
 
     // Show Orders
 });
