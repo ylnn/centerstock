@@ -9,7 +9,7 @@ use App\Http\Resources\Customer as CustomerResource;
 use Illuminate\Support\Facades\Validator;
 use App\Order;
 
-class OrderByCustomerController extends Controller
+class OrderQueryController extends Controller
 {
     public function index(Request $request)
     {
@@ -22,7 +22,7 @@ class OrderByCustomerController extends Controller
             return response()->json()->setStatusCode(422);
         }
 
-        $customer = Customer::findOrFail($request->customer_id);
+        $customer = Customer::find($request->customer_id);
 
         return Order::owner($request->user())->customer($customer)->get();
     }
