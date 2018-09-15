@@ -70,6 +70,11 @@ class CustomerOrderTest extends TestCase
         ]]);
     }
 
+    /**
+     * is user can retrieve own orders list with status equals OPEN
+     *
+     * @return void
+     */
     public function testIsUserCanRetrieveOwnOrdersListWithStatusEqualsOPEN()
     {
         //when
@@ -93,6 +98,11 @@ class CustomerOrderTest extends TestCase
     }
 
 
+    /**
+     * is user can retrieve own orders list with status equals WAITING
+     *
+     * @return void
+     */
     public function testIsUserCanRetrieveOwnOrdersListWithStatusEqualsWAITING()
     {
         //when
@@ -131,7 +141,12 @@ class CustomerOrderTest extends TestCase
         $response->assertStatus(422);
     }
 
-    public function testIsUserCanSeeSpecificOrderForCustomer()
+    /**
+     * is user can see specific orders for customer
+     *
+     * @return void
+     */
+    public function testIsUserCanSeeSpecificOrdersForCustomer()
     {
         //when
         $user = factory('App\User')->create();
