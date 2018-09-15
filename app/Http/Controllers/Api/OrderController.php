@@ -9,7 +9,7 @@ use App\Http\Resources\Customer as CustomerResource;
 use Illuminate\Support\Facades\Validator;
 use App\Order;
 
-class OrderQueryController extends Controller
+class OrderController extends Controller
 {
     public function index(Request $request)
     {
@@ -25,5 +25,17 @@ class OrderQueryController extends Controller
         $customer = Customer::find($request->customer_id);
 
         return Order::owner($request->user())->customer($customer)->get();
+    }
+
+
+    public function create(Request $request, Customer $customer)
+    {
+        if (!$customer) {
+            return response()->json('Not Found')->setStatusCode(404);
+        }
+
+        $order = new Order(['status' => 'OPEN']);
+
+        return $customer->addOrder($order, $request->user());
     }
 }

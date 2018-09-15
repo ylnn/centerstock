@@ -9,7 +9,7 @@ use App\Http\Resources\Product as ProductResource;
 use App\Http\Resources\Stock as StockResource;
 use Illuminate\Support\Facades\Validator;
 
-class ProductApiController extends Controller
+class ProductController extends Controller
 {
     /**
      * Product Search with Name
@@ -36,7 +36,7 @@ class ProductApiController extends Controller
      */
     public function productDetail(Request $request, Product $product)
     {
-        if(!$product){
+        if (!$product) {
             return response()->json('Not Found')->setStatusCode(404);
         }
         return StockResource::collection($product->stocks);
