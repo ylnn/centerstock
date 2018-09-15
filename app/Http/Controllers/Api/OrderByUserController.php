@@ -9,7 +9,7 @@ use App\Http\Resources\Customer as CustomerResource;
 use Illuminate\Support\Facades\Validator;
 use App\Order;
 
-class UserOrderController extends Controller
+class OrderByUserController extends Controller
 {
     /**
      * Customer Detail with ID

@@ -9,7 +9,7 @@ use App\Http\Resources\Customer as CustomerResource;
 use Illuminate\Support\Facades\Validator;
 use App\Order;
 
-class CustomerOrderController extends Controller
+class OrderByCustomerController extends Controller
 {
     public function index(Request $request)
     {
