@@ -11,32 +11,19 @@ use App\Order;
 
 class CustomerOrderController extends Controller
 {
-    /**
-     * Customer Detail with ID
-     *
-     * @param Request $request
-     * @param Customer $customer
-     * @return void
-     */
-    public function create(Request $request, Customer $customer)
-    {
-        if (!$customer) {
-            return response()->json('Not Found')->setStatusCode(404);
-        }
-
-        $order = new Order(['status' => 'OPEN']);
-
-        return $customer->addOrder($order, $request->user());
-    }
-
-    /**
-     * User get own order
-     *
-     * @param Request $request
-     * @return void
-     */
     public function index(Request $request)
     {
-        return $request->user()->orders()->get();
+        $validator = Validator::make($request->all(), [
+            'status' => 'nullable|in:'.implode(',', Order::STATUS),
+            'customer_id' => 'integer|exists:customers,id'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json()->setStatusCode(422);
+        }
+
+        $customer = Customer::findOrFail($request->customer_id);
+
+        return Order::owner($request->user())->customer($customer)->get();
     }
 }
