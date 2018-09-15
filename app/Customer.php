@@ -20,4 +20,15 @@ class Customer extends Model
     {
         return $this->belongsTo('App\Customer');
     }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
+
+    public function addOrder($order, $user)
+    {
+        $order->user_id = $user->id;
+        return $this->orders()->save($order);
+    }
 }
