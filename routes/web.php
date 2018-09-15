@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\App;
+
 // dd(App::environment());
 
 Route::get('/', 'Admin\DashboardController@index')->name('dashboard');
@@ -41,7 +42,7 @@ Route::get('/stock/{product}/create', 'Admin\StockController@create')->name('adm
 Route::post('/stock/{product}/store', 'Admin\StockController@store')->name('admin.stock.store');
 Route::get('/stock/{product}/show/{stock}', 'Admin\StockController@show')->name('admin.stock.show');
 Route::get('/stock/{product}/edit/{stock}', 'Admin\StockController@edit')->name('admin.stock.edit');
-Route::post('/stock/{product}/update/{stock}', 'Admin\StockController@update')->name('admin.stock.update');
+Route::post('/stock/update/{stock}', 'Admin\StockController@update')->name('admin.stock.update');
 Route::post('/stock/{product}/delete/{stock}', 'Admin\StockController@delete')->name('admin.stock.delete');
 
 // Salesman
