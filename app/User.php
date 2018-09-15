@@ -43,6 +43,11 @@ class User extends Authenticatable
         return $this->customers()->save($customer);
     }
 
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
+
     protected static function boot()
     {
         parent::boot();
