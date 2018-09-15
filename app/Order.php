@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     const STATUS = [
-        "OPEN",
-        "WAITING",
-        "APPROVED",
-        "SHIPPED",
-        "DONE"
+        "OPEN" => "OPEN",
+        "WAITING" => "WAITING",
+        "APPROVED" => "APPROVED",
+        "SHIPPED" => "SHIPPED",
+        "DONE" => "DONE"
     ];
 
     protected $fillable = ['status', 'customer_id', 'user_id'];
@@ -24,6 +24,24 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function scopeStatus($query, $status)
+    {
+        if (is_null($status)) {
+            return $query;
+        }
+        return $query->where('status', $status);
+    }
+
+    public function scopeOwner($query, User $user)
+    {
+        return $query->where('user_id', $user->id);
+    }
+
+    public function scopeCustomer($query, Customer $customer)
+    {
+        return $query->where('customer_id', $customer->id);
     }
 
     public function addUser(User $user)
