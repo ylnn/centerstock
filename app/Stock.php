@@ -14,4 +14,9 @@ class Stock extends Model
     {
         return $this->belongsTo('App\Product');
     }
+
+    public function isAvailableFor(int $wantedQuantity)
+    {
+        return $this->quantity >= $wantedQuantity;
+    }
 }
