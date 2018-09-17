@@ -19,12 +19,22 @@ class Order extends Model
 
     public function customer()
     {
-        return $this->belongsTo('App\Customer');
+        return $this->belongsTo(Customer::class);
     }
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
+    }
+
+    public function items()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
+    public function isOpen()
+    {
+        return $this->status === self::STATUS['OPEN'];
     }
 
     public function scopeStatus($query, $status)
@@ -46,10 +56,5 @@ class Order extends Model
             return $query;
         }
         return $query->where('customer_id', $customer->id);
-    }
-
-    public function addUser(User $user)
-    {
-        $user->orders()->save($this);
     }
 }
