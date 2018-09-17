@@ -34,8 +34,11 @@ class OrderController extends Controller
             return response()->json('Not Found')->setStatusCode(404);
         }
 
-        $order = new Order(['status' => 'OPEN']);
+        $order = new Order([
+            'status' => 'OPEN',
+            'user_id' => $request->user()->id,
+        ]);
 
-        return $customer->addOrder($order, $request->user());
+        return $customer->setOrder($order);
     }
 }
