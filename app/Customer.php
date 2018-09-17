@@ -13,22 +13,27 @@ class Customer extends Model
 
     public function area()
     {
-        return $this->belongsTo('App\Area', 'area_id');
+        return $this->belongsTo(Area::class, 'area_id');
     }
 
     public function user()
     {
-        return $this->belongsTo('App\Customer');
+        return $this->belongsTo(User::class);
     }
 
     public function orders()
     {
-        return $this->hasMany('App\Order');
+        return $this->hasMany(Order::class);
     }
 
-    public function addOrder($order, $user)
+
+    public function setOrder($order)
     {
-        $order->user_id = $user->id;
         return $this->orders()->save($order);
+    }
+
+    public function setUser(User $user)
+    {
+        $this->user_id = $user->id;
     }
 }
