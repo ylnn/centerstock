@@ -50,6 +50,10 @@ class Handler extends ExceptionHandler
         if (App::environment('testing')) {
             throw $exception;
         }
+
+        if ($request->wantsJson()) {
+            return $this->renderExceptionAsJson($request, $exception);
+        }
         return parent::render($request, $exception);
     }
 }

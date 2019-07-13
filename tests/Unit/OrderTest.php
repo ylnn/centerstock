@@ -23,4 +23,48 @@ class OrderTest extends TestCase
 
         $this->assertEquals($secondOrder->isOpen(), true);
     }
+
+    public function test_order_isStatusValid_method_is_working()
+    {
+        $user = factory('App\User')->create();
+        $this->actingAs($user, 'api');
+
+        $order = Order::make(['status' => Order::STATUS['OPEN']]);
+
+        $this->assertEquals($order->isStatusValid(Order::STATUS['WAITING']), true);
+
+        $this->assertEquals($order->isStatusValid(Order::STATUS['DONE']), true);
+
+        $this->assertEquals($order->isStatusValid(Order::STATUS['OPEN']), true);
+
+        $this->assertEquals($order->isStatusValid('HATALI'), false);
+
+        $this->assertEquals($order->isStatusValid('ERR'), false);
+
+    }
+
+
+    public function test_order_setStatus_method_is_working()
+    {
+        $user = factory('App\User')->create();
+        $this->actingAs($user, 'api');
+
+        $customer = factory('App\Customer')->create();
+
+        $order = Order::make(['user_id' => $user->id]);
+        $order->status = Order::STATUS['OPEN'];
+        $customer->orders()->save($order);
+
+        $this->assertEquals(Order::STATUS['OPEN'], $order->getStatus());
+
+        $order->setStatus(Order::STATUS['WAITING']);
+
+        $this->assertEquals(Order::STATUS['WAITING'], $order->getStatus());
+
+        $order->setStatus(Order::STATUS['DONE']);
+
+        $this->assertEquals(Order::STATUS['DONE'], $order->getStatus());
+
+
+    }
 }

@@ -10,24 +10,28 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\Customer as CustomerResource;
+use App\Http\Resources\OrderItem as OrderItemResource;
 
 class OrderItemController extends Controller
 {
-    /*     public function index(Request $request)
-        {
-            $validator = Validator::make($request->all(), [
-                'status' => 'nullable|in:'.implode(',', Order::STATUS),
-                'customer_id' => 'integer|exists:customers,id'
-            ]);
+    public function index(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'order_id' => 'integer|exists:orders,id',
+        ]);
 
-            if ($validator->fails()) {
-                return response()->json()->setStatusCode(422);
-            }
+        $order = Order::owner($request->user())->where('id', $request->order_id)->firstOrFail();
 
-            $customer = Customer::find($request->customer_id);
+        $orderItems = $order->items()->get();
 
-            return Order::owner($request->user())->customer($customer)->get();
-        } */
+        // dump($orderItems);
+
+        if ($validator->fails()) {
+            return response()->json()->setStatusCode(422);
+        }
+
+        return OrderItemResource::collection($orderItems);
+    }
 
 
     public function create(Request $request)
@@ -62,5 +66,35 @@ class OrderItemController extends Controller
         }
 
         return $order->items()->save($orderItem);
+    }
+
+    public function destroy(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+                'order_id' => 'integer|exists:orders,id',
+                'customer_id' => 'integer|exists:customers,id',
+                'orderitem_id' => 'integer|exists:order_items,id',
+            ]);
+
+        $order = Order::owner($request->user())->where('id', $request->order_id)->firstOrFail();
+
+        if ($validator->fails()) {
+            return response()->json(['message'=>'validation error'])->setStatusCode(422);
+        }
+
+        $deleted = OrderItem::where('id', $request->orderitem_id)
+                            ->where('customer_id', $request->customer_id)
+                            ->where('order_id', $request->order_id)
+                            ->delete();
+
+        if (!$deleted) {
+            return response()->json(['message'=>'deletion error'])->setStatusCode(422);
+        }
+
+        if (!$order->isOpen()) {
+            return response()->json(['message' => 'order status is not open.'])->setStatusCode(422);
+        }
+
+        return response()->json(['message' => 'deleted'])->setStatusCode(200);
     }
 }

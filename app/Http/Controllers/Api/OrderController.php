@@ -41,4 +41,21 @@ class OrderController extends Controller
 
         return $customer->setOrder($order);
     }
+
+    public function update(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'order_id' => 'integer|exists:orders,id'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json()->setStatusCode(422);
+        }
+
+        $order = Order::owner($request->user())->where('id', $request->order_id)->firstOrFail();
+
+        $order->setStatus(Order::STATUS['WAITING']);
+
+        return response()->json(['message' => 'order sent.'])->setStatusCode(200);
+    }
 }

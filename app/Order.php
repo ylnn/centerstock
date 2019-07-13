@@ -37,6 +37,24 @@ class Order extends Model
         return $this->status === self::STATUS['OPEN'];
     }
 
+    public function getStatus()
+    {
+        return $this->status;   
+    }
+
+    public function setStatus(string $status)
+    {
+        if(!$this->isStatusValid($status)) {
+            return false;
+        }
+        self::update(['status' => $status]);
+    }
+
+    public function isStatusValid(string $status)
+    {
+        return in_array($status, self::STATUS);
+    }
+
     public function scopeStatus($query, $status)
     {
         if (is_null($status)) {

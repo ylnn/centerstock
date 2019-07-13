@@ -12,8 +12,12 @@ Route::middleware(['auth:api'])->group(function () {
     // Order
     Route::post('/order/query', 'Api\OrderController@index')->name('api.customer.orders');
     Route::get('/order/create/{customer}', 'Api\OrderController@create')->name('api.order.create');
+    Route::post('/order/update', 'Api\OrderController@update')->name('api.order.update');
+
 
     Route::post('/orderitem/create', 'Api\OrderItemController@create')->name('api.orderitem.create');
+    Route::post('/orderitem/destroy', 'Api\OrderItemController@destroy')->name('api.orderitem.destroy');
+    Route::post('/orderitem/index', 'Api\OrderItemController@index')->name('api.orderitem.index');
 
     // Route::post('/customer-orders', 'Api\CustomerOrderController@index')->name('api.customer.orders');
 
