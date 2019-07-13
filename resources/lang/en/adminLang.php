@@ -1,0 +1,62 @@
+<?php
+
+return [
+    'admin-panel' => 'Admin Panel',
+    'logout' => 'Logout',
+    'new' => 'New',
+    'show' => 'Show',
+    'edit' => 'Ediy',
+    'delete' => 'Delete',
+    'apply-filter' => 'Filter',
+    'search' => 'Search',
+    'name' => 'Name',
+    'desc' => 'Description',
+    'none' => 'None',
+    'add' => 'Add',
+    'update' => 'Update',
+    'actions' => 'Actions',
+    'phone' => 'Phone',
+    'email' => 'E-mail',
+    'reset' => 'Reset',
+    'save' => 'Save',
+    'cancel' => 'Cancel',
+    'back' => 'Back',
+    'saved' => 'Saved',
+    'deleted' => 'Deleted',
+    'cantdeleted' => 'Cannot deleted',
+    'not-found' => 'Not found',
+    'are-you-sure' => 'Are you sure?',
+
+    'customers' => 'Customers',
+    'customer' => 'Customer',
+    'create-customer' => 'Create Customer',
+
+    'areas' => 'Areas',
+    'area' => 'Area',
+    'create-area' => 'Create Area',
+
+    'products' => 'Products',
+    'product' => 'Product',
+    'create-product' => 'Create Product',
+    'base_price' => 'Base Price',
+
+    'stocks' => 'Stocks',
+    'stock' => 'Stock',
+    'create-stock' => 'Create Stock',
+    'serial' => 'Serial Number',
+    'product-name' => 'Product Name',
+    'quantity' => 'Quantity',
+    'expiration' => 'Expiration Date',
+    'purchase_price' => 'Purchase Price',
+    'sale_price' => 'Sale Price',
+
+    'salesmans' => 'Salesmans',
+    'salesman' => 'Salesman',
+    'create-salesman' => 'Create Salesman',
+    'status' => 'Status',
+    'password' => 'Password',
+    'address' => 'Address',
+    'all' => 'All',
+
+
+];

@@ -78,14 +78,14 @@ return [
     |
     */
 
-    'locale' => 'tr',
+    'locale' => 'en',
 
 
     // Currency Locale
-    setlocale(LC_MONETARY, 'tr_TR'),
+    setlocale(LC_MONETARY, 'en_EN'),
 
 
-    'faker_locale' => 'tr_TR',
+    'faker_locale' => 'en_EN',
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
